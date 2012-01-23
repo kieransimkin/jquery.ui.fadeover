@@ -39,7 +39,7 @@ $.widget( "ui.fadeover", {
 			this._determine_image_dimensions();
 			return;
 		} else if (this.is_html() && (this.options.width === null || this.options.height === null)) { 
-			alert('No sized specified for HTML FadeOver widget.');
+			alert('No size specified for HTML FadeOver widget.');
 			return;
 		}
 		if (typeof(this.options.width)!="number" || parseInt(this.options.width)!=this.options.width || typeof(this.options.height)!="number" || parseInt(this.options.height)!=this.options.height) { 
@@ -104,9 +104,8 @@ $.widget( "ui.fadeover", {
 						.addClass('ui-widget')
 						.addClass('ui-widget-over-image')
 						.appendTo(this.overdiv);
-			if (this.options.images.disabled===null) { 
+			if (this.options.images.disabled!==null) { 
 
-			} else { 
 				this.disabled_image_is_loaded=false;
 				this.disabled_image = $('<img />');
 				this.disabled_image	.bind('load',this._disabled_image_loaded(this));
