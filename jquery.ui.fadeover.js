@@ -21,6 +21,8 @@ $.widget( "ui.fadeover", {
         options: {
 		width: null,
 		height: null,
+		alt: '',
+		title: null,
 		disabled: false,
 		loading_img: 'ajaxloader.gif',
 		images: {
@@ -35,6 +37,9 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	_create: function() { 
+		if (this.options.title===null) { 
+			this.options.title=this.options.alt;
+		}
 		var preload_loader = new Image();
 		preload_loader.src=this.options.loading_img;
 		if (this.is_image() && (this.options.width === null || this.options.height === null)) { 
@@ -114,6 +119,8 @@ $.widget( "ui.fadeover", {
 			this.normal_image = $('<img />');
 			this.normal_image	.bind('load',this._normal_image_loaded(this));
 			this.normal_image	.attr('src',this.options.images.normal)
+						.attr('alt',this.options.alt)
+						.attr('title',this.options.title)
 						.addClass('ui-widget')
 						.addClass('ui-widget-normal-image')
 						.appendTo(this.element);
@@ -121,6 +128,8 @@ $.widget( "ui.fadeover", {
 			this.over_image = $('<img />');
 			this.over_image		.bind('load',this._over_image_loaded(this));
 			this.over_image		.attr('src',this.options.images.over)
+						.attr('alt',this.options.alt)
+						.attr('title',this.options.title)
 						.addClass('ui-widget')
 						.addClass('ui-widget-over-image')
 						.appendTo(this.overdiv);
@@ -130,6 +139,8 @@ $.widget( "ui.fadeover", {
 				this.disabled_image = $('<img />');
 				this.disabled_image	.bind('load',this._disabled_image_loaded(this));
 				this.disabled_image	.attr('src',this.options.images.disabled)
+							.attr('alt',this.options.alt)
+							.attr('title',this.options.title)
 							.addClass('ui-widget')
 							.addClass('ui-widget-disabled-image')
 							.appendTo(this.disableddiv);
