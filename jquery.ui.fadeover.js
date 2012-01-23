@@ -22,6 +22,7 @@ $.widget( "ui.fadeover", {
 		width: null,
 		height: null,
 		disabled: false,
+		loading_img: 'ajaxloader.gif',
 		images: {
 			normal: null,
 			over: null,
@@ -48,7 +49,53 @@ $.widget( "ui.fadeover", {
 		this._do_html_setup();
 	},
 	_do_html_setup: function() { 
-		$(this.element).	css({display: 'block',position: 'relative'});
+		this.element.		css({
+						display: 'block',
+						position: 'relative',
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover');
+		this.hotspot=$('<div></div>')
+					.css({
+						display: 'block',
+						position: 'absolute'
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-hotspot')
+					.appendTo(this.element);
+		this.overdiv=$('</div></div>')
+					.css({
+						display: 'block',
+						position: 'absolute'
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-over')
+					.appendTo(this.element);
+		if (this.is_image) { 
+			this.normal_img = $('<img />')
+						.attr('src',this.options.images.normal)
+						.appendTo(this.element);
+			this.over_img = $('<img />'
+						.attr('src',this.options.images.over)
+						.appendTo(this.overdiv);
+		} else { 
+			this.normal_html = $('<div></div>')
+						.addClass('ui-widget')
+						.addClass('ui-widget-fadeover-html-content')
+						.html(this.options.html_fragments.normal)
+						.appendTo(this.element);
+			this.over_html = $('<div></div>')
+						.addClass('ui-widget')
+						.addClass('ui-widget-fadeover-over-html-content')
+						.html(this.options.html_fragments.over)
+						.appendTo(this.overdiv);
+		}
 
 	},
 	_determine_image_dimensions: function() { 
