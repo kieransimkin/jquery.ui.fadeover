@@ -19,24 +19,24 @@ EN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 jQuery.widget( "ui.fadeover", {
         // These options will be used as defaults
         options: {
-
+		disabled: false
 	},
 	_create: function() { 
 
 	},
 	_setOption: function(key, value) { 
 		switch( key ) {
-		        case "clear":
-				// handle changes to clear option
-
+			case "disable":
+				// handle enabling and disabling	
 				break;
-
+		        case "clear":
+				break;
 		}
 
-		$.Widget.prototype._setOption.apply( this, arguments );
+		jQuery.Widget.prototype._setOption.apply( this, arguments );
 	},
 	destroy: function() { 
-		$.Widget.prototype.destroy.call( this );	
+		jQuery.Widget.prototype.destroy.call( this );	
 	}
 });
 }(jQuery));
