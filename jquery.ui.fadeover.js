@@ -19,10 +19,57 @@ EN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 $.widget( "ui.fadeover", {
         // These options will be used as defaults
         options: {
-		disabled: false
+		width: null,
+		height: null,
+		disabled: false,
+		images: {
+			normal: null,
+			over: null,
+			disabled: null
+		},
+		html_fragments: {
+			normal: null,
+			over: null,
+			disabled: null
+		}
 	},
 	_create: function() { 
+		if (this.is_image() && (this.options.width === null || this.options.height === null)) { 
+			this._determine_image_dimensions();
+			return;
+		} else if (this.is_html() && (this.options.width === null || this.options.height === null)) { 
+			alert('No sized specified for HTML FadeOver widget.');
+			return;
+		}
+		if (typeof(this.options.width)!="number" || parseInt(this.options.width)!=this.options.width || typeof(this.options.height)!="number" || parseInt(this.options.height)!=this.options.height) { 
+			alert('FadeOver width and height must be numeric');
+			return;
+		}
+		this._do_html_setup();
+	},
+	_do_html_setup: function() { 
+		$(this.element).	css({display: 'block',position: 'relative'});
 
+	},
+	_determine_image_dimensions: function() { 
+		var normal = new Image();
+		var me=this;
+		$(normal).bind("load", function() { 
+			me.options.width=this.width();
+			me.options.height=this.height();
+			me._create();
+		});
+		normal.src=this.options.images.normal;
+	},
+	is_image: function() { 
+		if (this.options.images.normal !== null && this.options.images.over !== null) { 
+			return true;
+		} else { 
+			return false;
+		}
+	},
+	is_html: function() { 
+		return !this.is_image();
 	},
 	_setOption: function(key, value) { 
 		switch( key ) {
