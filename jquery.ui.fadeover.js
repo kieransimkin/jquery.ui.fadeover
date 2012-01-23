@@ -26,7 +26,7 @@ jQuery.widget( "ui.fadeover", {
 	},
 	_setOption: function(key, value) { 
 		switch( key ) {
-			case "disable":
+			case "disabled":
 				// handle enabling and disabling	
 				break;
 		        case "clear":
