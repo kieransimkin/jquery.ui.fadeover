@@ -49,6 +49,7 @@ $.widget( "ui.fadeover", {
 		this._do_html_setup();
 	},
 	_do_html_setup: function() { 
+		this.element.html('');
 		this.element.		css({
 						display: 'block',
 						position: 'relative',
