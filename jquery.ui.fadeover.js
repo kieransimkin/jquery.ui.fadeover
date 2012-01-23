@@ -15,8 +15,8 @@ LAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY
 EN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-(function( jQuery ) {
-jQuery.widget( "ui.fadeover", {
+(function( $ ) {
+$.widget( "ui.fadeover", {
         // These options will be used as defaults
         options: {
 		disabled: false
@@ -33,10 +33,10 @@ jQuery.widget( "ui.fadeover", {
 				break;
 		}
 
-		jQuery.Widget.prototype._setOption.apply( this, arguments );
+		$.Widget.prototype._setOption.apply( this, arguments );
 	},
 	destroy: function() { 
-		jQuery.Widget.prototype.destroy.call( this );	
+		$.Widget.prototype.destroy.call( this );	
 	}
 });
 }(jQuery));
