@@ -35,6 +35,8 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	_create: function() { 
+		var preload_loader = new Image();
+		preload_loader.src=this.options.loading_img;
 		if (this.is_image() && (this.options.width === null || this.options.height === null)) { 
 			this._determine_image_dimensions();
 			return;
@@ -48,8 +50,25 @@ $.widget( "ui.fadeover", {
 		}
 		this._do_html_setup();
 	},
+	_do_loader_setup: function() { 
+		this.loaderdiv=$('<div></div>')
+					.css({
+						display: 'block',
+						position: 'absolute'
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-loader');
+		this.loader_image = $('<img />');
+		this.loader_image		.attr('src',this.options.loading_img)
+						.addClass('ui-widget')
+						.addClass('ui-widget-loader-image')
+						.appendTo(this.loaderdiv);
+	},
 	_do_html_setup: function() { 
 		this.element.html('');
+		this._do_loader_setup();
 		this.element.		css({
 						display: 'block',
 						position: 'relative',
