@@ -90,21 +90,27 @@ $.widget( "ui.fadeover", {
 		if (this.is_image) { 
 			this.normal_image_is_loaded=false;
 			this.normal_image = $('<img />');
-			this.normal_image	.bind('load',this._normal_image_loaded);
+			this.normal_image	.bind('load',this._normal_image_loaded(this));
 			this.normal_image	.attr('src',this.options.images.normal)
+						.addClass('ui-widget')
+						.addClass('ui-widget-normal-image')
 						.appendTo(this.element);
 			this.over_image_is_loaded=false;
 			this.over_image = $('<img />');
-			this.over_image		.bind('load',this._over_image_loaded);
+			this.over_image		.bind('load',this._over_image_loaded(this));
 			this.over_image		.attr('src',this.options.images.over)
+						.addClass('ui-widget')
+						.addClass('ui-widget-over-image')
 						.appendTo(this.overdiv);
 			if (this.options.images.disabled===null) { 
 
 			} else { 
 				this.disabled_image_is_loaded=false;
 				this.disabled_image = $('<img />');
-				this.disabled_image	.bind('load',this._disabled_image_loaded);
+				this.disabled_image	.bind('load',this._disabled_image_loaded(this));
 				this.disabled_image	.attr('src',this.options.images.disabled)
+							.addClass('ui-widget')
+							.addClass('ui-widget-disabled-image')
 							.appendTo(this.disableddiv);
 
 			}
@@ -126,19 +132,28 @@ $.widget( "ui.fadeover", {
 	_loaded: function() {
 		this._trigger('ready');
 	},
-	_disabled_image_loaded: function() { 
-
-	},
-	_normal_image_loaded: function() { 
-		this.normal_image_is_loaded=true;
-		if (this.over_image_is_loaded) { 
-			this._loaded();
+	_disabled_image_loaded: function(me) { 
+		return function() { 
+			me.disabled_image_is_loaded=true;
+			if (me.over_image_is_loaded && me.normal_image_is_loaded) { 
+				me._loaded();
+			}
 		}
 	},
-	_over_image_loaded: function() { 
-		this.over_image_is_loaded=true;
-		if (this.normal_image_is_loaded) { 
-			this._loaded();
+	_normal_image_loaded: function(me) { 
+		return function() { 
+			me.normal_image_is_loaded=true;
+			if (me.over_image_is_loaded && (me.options.images.disabled===null || me.disabled_image_is_loaded)) { 
+				me._loaded();
+			}
+		}
+	},
+	_over_image_loaded: function(me) { 
+		return function() { 
+			me.over_image_is_loaded=true;
+			if (me.normal_image_is_loadedi && (me.options.images.disabled===null || me.disabled_image_is_loaded)) { 
+				me._loaded();
+			}
 		}
 	},
 	_determine_image_dimensions: function() { 
