@@ -1,0 +1,1 @@
+ * Support not specifying the size for HTML fragment type by using the render engine to work out the size in a back buffer
