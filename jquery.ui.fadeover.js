@@ -70,7 +70,8 @@ $.widget( "ui.fadeover", {
 		this.overdiv=$('</div></div>')
 					.css({
 						display: 'block',
-						position: 'absolute'
+						position: 'absolute',
+						opacity: '0.0'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -80,7 +81,8 @@ $.widget( "ui.fadeover", {
 		this.disableddiv=$('<div></div>')
 					.css({
 						display: 'block',
-						position: 'absolute'
+						position: 'abolute',
+						opacity: '0.0'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
