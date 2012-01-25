@@ -220,8 +220,9 @@ $.widget( "ui.fadeover", {
 		var normal = new Image();
 		var me=this;
 		$(normal).bind("load", function() { 
-			me.element.animate({width: this.width+'px', height: this.height+'px'});
-			me._create();
+			me.element.animate({width: this.width+'px', height: this.height+'px'},{duration: me.options.autosize_animate_duration, complete: function() { 
+				me._create();
+			}});
 		});
 		normal.src=this.options.images.normal;
 	},
