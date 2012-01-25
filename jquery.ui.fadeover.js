@@ -115,7 +115,7 @@ $.widget( "ui.fadeover", {
 					.height(this.options.height)
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover');
-		if (this.options.clickable) { 
+		if (this.options.clickable && !this.options.disabled) { 
 			this.element.css({cursor: 'pointer'});
 		}
 		this.hotspot=$('<div></div>')
