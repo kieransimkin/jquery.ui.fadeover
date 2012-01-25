@@ -222,8 +222,8 @@ $.widget( "ui.fadeover", {
 		$(normal).bind("load", function() { 
 			me.options.width=this.width;
 			me.options.height=this.height;
-			me._create();
 			me.element.animate({width: this.width+'px', height: this.height+'px'},{duration: me.options.autosize_animate_duration, complete: function() { 
+				me._create();
 			}});
 		});
 		normal.src=this.options.images.normal;
