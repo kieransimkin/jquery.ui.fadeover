@@ -59,18 +59,27 @@ $.widget( "ui.fadeover", {
 		this._bind_events();
 	},
 	_bind_events: function() { 
-		this.element.bind('mouseover.'+this.widgetName, this._mouseover);
-		this.element.bind('mouseout.'+this.widgetName, this._mouseout);
-		this.element.bind('click.'+this.widgetName, this._mouseclick);
+		this.element.bind('mouseover.'+this.widgetName, this._mouseover());
+		this.element.bind('mouseout.'+this.widgetName, this._mouseout());
+		this.element.bind('click.'+this.widgetName, this._mouseclick());
 	},
-	_mouseover: function(event) { 
-		this.overdiv.animate({opacity: 1.0});
+	_mouseover: function() { 
+		var me = this;
+		return function(event) { 
+			me.overdiv.animate({opacity: 1.0});
+		}
 	},
-	_mouseout: function(event) { 
-		this.overdiv.animate({opacity: 0.0});
+	_mouseout: function() { 
+		var me = this;
+		return function(event) { 
+			this.overdiv.animate({opacity: 0.0});
+		}
 	},
-	_mouseclick: function(event) {
-		alert('clicked');
+	_mouseclick: function() { 
+		var me = this;
+		return function(event) {
+			alert('clicked');
+		}
 	},
 	_do_loader_setup: function() { 
 		this.loaderdiv=$('<div></div>')
