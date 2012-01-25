@@ -25,6 +25,8 @@ $.widget( "ui.fadeover", {
 		title: null,
 		disabled: false,
 		loading_img: 'ajaxloader.gif',
+		over_duration: 200,
+		out_duration: 600,
 		images: {
 			normal: null,
 			over: null,
@@ -66,13 +68,13 @@ $.widget( "ui.fadeover", {
 	_mouseover: function() { 
 		var me = this;
 		return function(event) { 
-			me.overdiv.animate({opacity: 1.0});
+			me.overdiv.animate({opacity: 1.0, duration: me.options.over_duration});
 		}
 	},
 	_mouseout: function() { 
 		var me = this;
 		return function(event) { 
-			me.overdiv.animate({opacity: 0.0});
+			me.overdiv.animate({opacity: 0.0, duration: me.options.out_duration});
 		}
 	},
 	_mouseclick: function() { 
@@ -218,8 +220,7 @@ $.widget( "ui.fadeover", {
 		var normal = new Image();
 		var me=this;
 		$(normal).bind("load", function() { 
-			me.options.width=this.width;
-			me.options.height=this.height;
+			me.element.animate({width: this.width+'px', height: this.height+'px'});
 			me._create();
 		});
 		normal.src=this.options.images.normal;
