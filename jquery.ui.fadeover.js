@@ -132,7 +132,7 @@ $.widget( "ui.fadeover", {
 		this.disableddiv=$('<div></div>')
 					.css({
 						display: 'block',
-						position: 'abolute',
+						position: 'absolute',
 						opacity: '0.0'
 					})
 					.width(this.options.width)
