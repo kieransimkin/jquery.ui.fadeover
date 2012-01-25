@@ -72,7 +72,7 @@ $.widget( "ui.fadeover", {
 	_mouseout: function() { 
 		var me = this;
 		return function(event) { 
-			this.overdiv.animate({opacity: 0.0});
+			me.overdiv.animate({opacity: 0.0});
 		}
 	},
 	_mouseclick: function() { 
