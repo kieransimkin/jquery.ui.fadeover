@@ -27,6 +27,7 @@ $.widget( "ui.fadeover", {
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
 		out_duration: 600,
+		autosize_animate_duration: 600,
 		images: {
 			normal: null,
 			over: null,
