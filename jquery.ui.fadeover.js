@@ -107,6 +107,7 @@ $.widget( "ui.fadeover", {
 		this.element.		css({
 						display: 'block',
 						position: 'relative',
+						cursor: 'pointer'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
