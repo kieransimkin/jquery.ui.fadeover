@@ -71,20 +71,35 @@ $.widget( "ui.fadeover", {
 	_mouseover: function() { 
 		var me = this;
 		return function(event) { 
-			me.overdiv.animate({opacity: 1.0, duration: me.options.over_duration});
+			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
+				me.current_effect.cancel();
+				me.current_effect=null;
+			}
+			me.current_effect=me.overdiv.animate({opacity: 1.0, duration: me.options.over_duration, complete: function() { 
+				me.current_effect=null;
+			}});
 		}
 	},
 	_mouseout: function() { 
 		var me = this;
 		return function(event) { 
-			me.overdiv.animate({opacity: 0.0, duration: me.options.out_duration});
+			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
+				me.current_effect.cancel();
+				me.current_effect=null;
+			}
+			me.current_effect=me.overdiv.animate({opacity: 0.0, duration: me.options.out_duration, complete: function() { 
+				me.current_effect=null;
+			}});
 		}
 	},
 	_mouseclick: function() { 
 		var me = this;
 		return function(event) {
 			if (me.options.clickable && !me.options.disabled) { 
-				me.element.click();
+				return true;
+			} else {
+				// Don't bubble
+				return false;
 			}
 		}
 	},
@@ -193,8 +208,9 @@ $.widget( "ui.fadeover", {
 						.addClass('ui-widget-fadeover-over-html-content')
 						.html(this.options.html_fragments.over)
 						.appendTo(this.overdiv);
+			// Nothing to load, no need to wait - trigger 'ready' now:
+			this._loaded();
 		}
-		this._loaded();
 
 	},
 	_loaded: function() {
@@ -219,7 +235,7 @@ $.widget( "ui.fadeover", {
 	_over_image_loaded: function(me) { 
 		return function() { 
 			me.over_image_is_loaded=true;
-			if (me.normal_image_is_loadedi && (me.options.images.disabled===null || me.disabled_image_is_loaded)) { 
+			if (me.normal_image_is_loaded && (me.options.images.disabled===null || me.disabled_image_is_loaded)) { 
 				me._loaded();
 			}
 		}
