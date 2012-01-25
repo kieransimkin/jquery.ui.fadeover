@@ -172,6 +172,7 @@ $.widget( "ui.fadeover", {
 							.appendTo(this.disableddiv);
 
 			}
+			console.log('got here');
 		} else { 
 			this.normal_html = $('<div></div>')
 						.addClass('ui-widget')
@@ -183,7 +184,6 @@ $.widget( "ui.fadeover", {
 						.addClass('ui-widget-fadeover-over-html-content')
 						.html(this.options.html_fragments.over)
 						.appendTo(this.overdiv);
-			console.log('got here');
 		}
 		this._loaded();
 
