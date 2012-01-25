@@ -72,7 +72,7 @@ $.widget( "ui.fadeover", {
 		var me = this;
 		return function(event) { 
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
-				me.current_effect.cancel();
+				me.current_effect.stop();
 				me.current_effect=null;
 			}
 			me.current_effect=me.overdiv.animate({opacity: 1.0, duration: me.options.over_duration, complete: function() { 
@@ -84,7 +84,7 @@ $.widget( "ui.fadeover", {
 		var me = this;
 		return function(event) { 
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
-				me.current_effect.cancel();
+				me.current_effect.stop();
 				me.current_effect=null;
 			}
 			me.current_effect=me.overdiv.animate({opacity: 0.0, duration: me.options.out_duration, complete: function() { 
