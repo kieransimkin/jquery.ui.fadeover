@@ -218,8 +218,8 @@ $.widget( "ui.fadeover", {
 		var normal = new Image();
 		var me=this;
 		$(normal).bind("load", function() { 
-			me.options.width=this.width();
-			me.options.height=this.height();
+			me.options.width=this.width;
+			me.options.height=this.height;
 			me._create();
 		});
 		normal.src=this.options.images.normal;
