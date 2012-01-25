@@ -54,6 +54,21 @@ $.widget( "ui.fadeover", {
 			return;
 		}
 		this._do_html_setup();
+		this._bind_events();
+	},
+	_bind_events: function() { 
+		this.element.bind('mouseover.'+this.widgetName, this._mouseover);
+		this.element.bind('mouseout.'+this.widgetName, this._mouseout);
+		this.element.bind('click.'+this.widgetName, this._mouseclick);
+	},
+	_mouseover: function(event) { 
+		this.overdiv.animate({opacity: 1.0});
+	},
+	_mouseout: function(event) { 
+		this.overdiv.animate({opacity: 0.0});
+	},
+	_mouseclick: function(event) {
+		alert('clicked');
 	},
 	_do_loader_setup: function() { 
 		this.loaderdiv=$('<div></div>')
@@ -212,8 +227,6 @@ $.widget( "ui.fadeover", {
 		switch( key ) {
 			case "disabled":
 				// handle enabling and disabling	
-				break;
-		        case "clear":
 				break;
 		}
 
