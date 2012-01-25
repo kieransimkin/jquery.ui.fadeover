@@ -27,7 +27,8 @@ $.widget( "ui.fadeover", {
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
 		out_duration: 600,
-		autosize_animate_duration: 600,
+		autosize_slide_animate_duration: 600,
+		autosize_fade_animate_duration: 600,
 		images: {
 			normal: null,
 			over: null,
@@ -223,8 +224,10 @@ $.widget( "ui.fadeover", {
 		$(normal).bind("load", function() { 
 			me.options.width=this.width;
 			me.options.height=this.height;
-			me.element.animate({width: this.width+'px', height: this.height+'px'},{duration: me.options.autosize_animate_duration, complete: function() { 
+			me.element.css({opacity: '0.0'});
+			me.element.animate({width: this.width+'px', height: this.height+'px'},{duration: me.options.autosize_slide_animate_duration, complete: function() { 
 				me._create();
+				me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
 			}});
 		});
 		normal.src=this.options.images.normal;
