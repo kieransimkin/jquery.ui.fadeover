@@ -61,6 +61,7 @@ $.widget( "ui.fadeover", {
 		this.options.height=parseInt(this.options.height);
 		this._do_html_setup();
 		this._bind_events();
+		console.log(this.element.onclick);
 	},
 	_bind_events: function() { 
 		this.element.bind('mouseover.'+this.widgetName, this._mouseover());
