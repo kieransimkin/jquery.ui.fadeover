@@ -140,7 +140,7 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-disabled')
 					.appendTo(this.element);
-		if (this.is_image) { 
+		if (this.is_image()) { 
 			this.normal_image_is_loaded=false;
 			this.normal_image = $('<img />');
 			this.normal_image	.bind('load',this._normal_image_loaded(this));
@@ -172,7 +172,6 @@ $.widget( "ui.fadeover", {
 							.appendTo(this.disableddiv);
 
 			}
-			console.log('got here');
 		} else { 
 			this.normal_html = $('<div></div>')
 						.addClass('ui-widget')
