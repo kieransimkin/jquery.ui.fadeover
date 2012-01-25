@@ -24,6 +24,7 @@ $.widget( "ui.fadeover", {
 		alt: '',
 		title: null,
 		disabled: false,
+		clickable: true,
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
 		out_duration: 600,
@@ -61,7 +62,6 @@ $.widget( "ui.fadeover", {
 		this.options.height=parseInt(this.options.height);
 		this._do_html_setup();
 		this._bind_events();
-		console.log(this.element.click);
 	},
 	_bind_events: function() { 
 		this.element.bind('mouseover.'+this.widgetName, this._mouseover());
@@ -83,7 +83,9 @@ $.widget( "ui.fadeover", {
 	_mouseclick: function() { 
 		var me = this;
 		return function(event) {
-			alert('clicked');
+			if (me.options.clickable && !me.options.disabled) { 
+				me.element.click();
+			}
 		}
 	},
 	_do_loader_setup: function() { 
@@ -107,13 +109,15 @@ $.widget( "ui.fadeover", {
 		this._do_loader_setup();
 		this.element.		css({
 						display: 'block',
-						position: 'relative',
-						cursor: 'pointer'
+						position: 'relative'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover');
+		if (this.options.clickable) { 
+			this.element.css({cursor: 'pointer'});
+		}
 		this.hotspot=$('<div></div>')
 					.css({
 						display: 'block',
