@@ -49,10 +49,12 @@ $.widget( "ui.fadeover", {
 			alert('No size specified for HTML FadeOver widget.');
 			return;
 		}
-		if (typeof(this.options.width)!="number" || parseInt(this.options.width)!=this.options.width || typeof(this.options.height)!="number" || parseInt(this.options.height)!=this.options.height) { 
+		if (parseInt(this.options.width)!=this.options.width || parseInt(this.options.height)!=this.options.height) { 
 			alert('FadeOver width and height must be numeric');
 			return;
 		}
+		this.options.width=parseInt(this.options.width);
+		this.options.height=parseInt(this.options.height);
 		this._do_html_setup();
 		this._bind_events();
 	},
