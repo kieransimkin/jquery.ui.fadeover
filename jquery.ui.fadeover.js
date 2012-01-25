@@ -118,7 +118,7 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-hotspot')
 					.appendTo(this.element);
-		this.overdiv=$('</div></div>')
+		this.overdiv=$('<div></div>')
 					.css({
 						display: 'block',
 						position: 'absolute',
