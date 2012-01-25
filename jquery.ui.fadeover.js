@@ -183,8 +183,8 @@ $.widget( "ui.fadeover", {
 						.addClass('ui-widget-fadeover-over-html-content')
 						.html(this.options.html_fragments.over)
 						.appendTo(this.overdiv);
-			this._loaded();
 		}
+		this._loaded();
 
 	},
 	_loaded: function() {
