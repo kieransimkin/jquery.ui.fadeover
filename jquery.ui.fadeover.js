@@ -313,6 +313,37 @@ $.widget( "ui.fadeover", {
 		// Nothing to load, no need to wait - trigger 'ready' now:
 		this._loaded();
 	},
+	_setup_content_ui_button: function() { 
+		var buttonElement = this.element,
+		buttonText = $("<span></span>")
+			.addClass("ui-button-text")
+			.html(this.options.ui_button.label)
+			.appendTo(buttonElement.empty())
+			.text();
+
+		var icons = this.options.ui_button.icons,
+		multipleIcons = icons.primary && icons.secondary;
+		if (icons.primary || icons.secondary) {
+			buttonElement.addClass("ui-button-text-icon" +
+			(multipleIcons ? "s" : ""));
+			if (icons.primary) {
+				buttonElement.prepend("<span class='ui-button-icon-primary ui-icon " + icons.primary + "'></span>");
+			}
+			if (icons.secondary) {
+				buttonElement.append("<span class='ui-button-icon-secondary ui-icon " + icons.secondary + "'></span>");
+			}
+			if (!this.options.ui_button.text) {
+				buttonElement
+					.addClass(multipleIcons ? "ui-button-icons-only" : "ui-button-icon-only")
+					.removeClass("ui-button-text-icons ui-button-text-icon");
+				if (!this.hasTitle) {
+					buttonElement.attr("title", buttonText);
+				}
+			}
+		} else {
+			buttonElement.addClass("ui-button-text-only");
+		}
+	},
 	_loaded: function() {
 		this._trigger('ready');
 	},
