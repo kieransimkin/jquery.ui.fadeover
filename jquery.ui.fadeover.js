@@ -112,11 +112,11 @@ $.widget( "ui.fadeover", {
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget')
-					.addClass('ui-widget-loader');
+					.addClass('ui-widget-fadeover-loader');
 		this.loader_image = $('<img />');
 		this.loader_image		.attr('src',this.options.loading_img)
 						.addClass('ui-widget')
-						.addClass('ui-widget-loader-image')
+						.addClass('ui-widget-fadeover-loader-image')
 						.appendTo(this.loaderdiv);
 	},
 	_do_html_setup: function() { 
@@ -173,7 +173,7 @@ $.widget( "ui.fadeover", {
 						.attr('alt',this.options.alt)
 						.attr('title',this.options.title)
 						.addClass('ui-widget')
-						.addClass('ui-widget-normal-image')
+						.addClass('ui-widget-fadeover-normal-image')
 						.appendTo(this.element);
 			this.over_image_is_loaded=false;
 			this.over_image = $('<img />');
@@ -182,7 +182,7 @@ $.widget( "ui.fadeover", {
 						.attr('alt',this.options.alt)
 						.attr('title',this.options.title)
 						.addClass('ui-widget')
-						.addClass('ui-widget-over-image')
+						.addClass('ui-widget-fadeover-over-image')
 						.appendTo(this.overdiv);
 			if (this.options.images.disabled!==null) { 
 
@@ -193,7 +193,7 @@ $.widget( "ui.fadeover", {
 							.attr('alt',this.options.alt)
 							.attr('title',this.options.title)
 							.addClass('ui-widget')
-							.addClass('ui-widget-disabled-image')
+							.addClass('ui-widget-fadeover-disabled-image')
 							.appendTo(this.disableddiv);
 
 			}
