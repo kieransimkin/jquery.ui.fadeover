@@ -39,6 +39,15 @@ $.widget( "ui.fadeover", {
 			normal: null,
 			over: null,
 			disabled: null
+		},
+		ui_button: { 
+			enabled: false,
+			text: true,
+			label: null,
+			icons: {
+				primary: null,
+				secondary: null
+			}
 		}
 	},
 	_create: function() { 
@@ -262,7 +271,31 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	is_html: function() { 
-		return !this.is_image();
+		if (this.is_image()) { 
+			return false;
+		} else if (this.options.html_fragments.normal !== null && this.options.html_fragments.over !== null) { 
+			return true;
+		} else {
+			return false;
+		}
+	},
+	is_button: function() { 
+		if (this.is_image()) { 
+			return false;
+		} else if (this.is_html()) { 
+			return false;
+		} else if (this.options.ui_button.enabled) { 
+			return true;
+		} else { 
+			return false;
+		}
+	},
+	is_anything: function() { 
+		if (this.is_image() || this.is_html() || this.is_button()) { 
+			return true;
+		} else { 
+			return false;
+		}
 	},
 	_setOption: function(key, value) { 
 		switch( key ) {
