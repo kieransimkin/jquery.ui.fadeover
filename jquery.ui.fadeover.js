@@ -129,7 +129,7 @@ $.widget( "ui.fadeover", {
 						.appendTo(this.loaderdiv);
 	},
 	_do_html_setup: function() { 
-		this.element.html('');
+		this.element.empty();
 		this._do_loader_setup();
 		this.element.		css({
 						display: 'block',
