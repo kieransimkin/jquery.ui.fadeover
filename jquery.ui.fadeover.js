@@ -73,11 +73,11 @@ $.widget( "ui.fadeover", {
 		this._bind_events();
 	},
 	_bind_events: function() { 
-		this.element.bind('mouseover.'+this.widgetName, this._mouseover());
-		this.element.bind('mouseout.'+this.widgetName, this._mouseout());
+		this.element.bind('mouseenter.'+this.widgetName, this._mouseenter());
+		this.element.bind('mouseleave.'+this.widgetName, this._mouseleave());
 		this.element.bind('click.'+this.widgetName, this._mouseclick());
 	},
-	_mouseover: function() { 
+	_mouseenter: function() { 
 		var me = this;
 		return function(event) { 
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
@@ -89,7 +89,7 @@ $.widget( "ui.fadeover", {
 			}});
 		}
 	},
-	_mouseout: function() { 
+	_mouseleave: function() { 
 		var me = this;
 		return function(event) { 
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
@@ -141,6 +141,7 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget-fadeover');
 		if (this.options.clickable && !this.options.disabled) { 
 			this.element.css({cursor: 'pointer'});
+			this.element.attr('role','button');
 		}
 		this.hotspot=$('<div></div>')
 					.css({
@@ -175,52 +176,60 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget-fadeover-disabled')
 					.appendTo(this.element);
 		if (this.is_image()) { 
-			this.normal_image_is_loaded=false;
-			this.normal_image = $('<img />');
-			this.normal_image	.bind('load',this._normal_image_loaded(this));
-			this.normal_image	.attr('src',this.options.images.normal)
-						.attr('alt',this.options.alt)
-						.attr('title',this.options.title)
-						.addClass('ui-widget')
-						.addClass('ui-widget-fadeover-normal-image')
-						.appendTo(this.element);
-			this.over_image_is_loaded=false;
-			this.over_image = $('<img />');
-			this.over_image		.bind('load',this._over_image_loaded(this));
-			this.over_image		.attr('src',this.options.images.over)
-						.attr('alt',this.options.alt)
-						.attr('title',this.options.title)
-						.addClass('ui-widget')
-						.addClass('ui-widget-fadeover-over-image')
-						.appendTo(this.overdiv);
-			if (this.options.images.disabled!==null) { 
-
-				this.disabled_image_is_loaded=false;
-				this.disabled_image = $('<img />');
-				this.disabled_image	.bind('load',this._disabled_image_loaded(this));
-				this.disabled_image	.attr('src',this.options.images.disabled)
-							.attr('alt',this.options.alt)
-							.attr('title',this.options.title)
-							.addClass('ui-widget')
-							.addClass('ui-widget-fadeover-disabled-image')
-							.appendTo(this.disableddiv);
-
-			}
-		} else { 
-			this.normal_html = $('<div></div>')
-						.addClass('ui-widget')
-						.addClass('ui-widget-fadeover-html-content')
-						.html(this.options.html_fragments.normal)
-						.appendTo(this.element);
-			this.over_html = $('<div></div>')
-						.addClass('ui-widget')
-						.addClass('ui-widget-fadeover-over-html-content')
-						.html(this.options.html_fragments.over)
-						.appendTo(this.overdiv);
-			// Nothing to load, no need to wait - trigger 'ready' now:
-			this._loaded();
+			this._setup_content_image();
+		} else if (this.is_html()) { 
+			this._setup_content_html();
+		} else if (this.is_button()) { 
+			this._setup_content_ui_button();
 		}
 
+	},
+	_setup_content_image: function() { 
+		this.normal_image_is_loaded=false;
+		this.normal_image = $('<img />');
+		this.normal_image	.bind('load',this._normal_image_loaded(this));
+		this.normal_image	.attr('src',this.options.images.normal)
+					.attr('alt',this.options.alt)
+					.attr('title',this.options.title)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-normal-image')
+					.appendTo(this.element);
+		this.over_image_is_loaded=false;
+		this.over_image = $('<img />');
+		this.over_image		.bind('load',this._over_image_loaded(this));
+		this.over_image		.attr('src',this.options.images.over)
+					.attr('alt',this.options.alt)
+					.attr('title',this.options.title)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-over-image')
+					.appendTo(this.overdiv);
+		if (this.options.images.disabled!==null) { 
+
+			this.disabled_image_is_loaded=false;
+			this.disabled_image = $('<img />');
+			this.disabled_image	.bind('load',this._disabled_image_loaded(this));
+			this.disabled_image	.attr('src',this.options.images.disabled)
+						.attr('alt',this.options.alt)
+						.attr('title',this.options.title)
+						.addClass('ui-widget')
+						.addClass('ui-widget-fadeover-disabled-image')
+						.appendTo(this.disableddiv);
+
+		}
+	},
+	_setup_content_html: function() { 
+		this.normal_html = $('<div></div>')
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-html-content')
+					.html(this.options.html_fragments.normal)
+					.appendTo(this.element);
+		this.over_html = $('<div></div>')
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-over-html-content')
+					.html(this.options.html_fragments.over)
+					.appendTo(this.overdiv);
+		// Nothing to load, no need to wait - trigger 'ready' now:
+		this._loaded();
 	},
 	_loaded: function() {
 		this._trigger('ready');
