@@ -16,6 +16,11 @@ EN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
 (function( $ ) {
+
+var        baseClasses = "ui-button ui-widget ui-state-default ui-corner-all",
+var        otherClasses = "ui-state-hover ui-state-active " +
+		                "ui-button-icons-only ui-button-icon-only ui-button-text-icons ui-button-text-icon ui-button-text-only";
+
 $.widget( "ui.fadeover", {
         // These options will be used as defaults
         options: {
@@ -33,12 +38,14 @@ $.widget( "ui.fadeover", {
 		images: {
 			normal: null,
 			over: null,
-			disabled: null
+			disabled: null,
+			active: null
 		},
 		html_fragments: {
 			normal: null,
 			over: null,
-			disabled: null
+			disabled: null,
+			active: null
 		},
 		ui_button: { 
 			enabled: false,
@@ -175,6 +182,17 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-disabled')
 					.appendTo(this.element);
+		this.activediv=$('<div></div>')
+					.css({
+						display: 'block',
+						position: 'absolute',
+						opacity: '0.0'
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-active')
+					.appendTo(this.element);
 		if (this.is_image()) { 
 			this._setup_content_image();
 		} else if (this.is_html()) { 
@@ -187,7 +205,7 @@ $.widget( "ui.fadeover", {
 	_setup_content_image: function() { 
 		this.normal_image_is_loaded=false;
 		this.normal_image = $('<img />');
-		this.normal_image	.bind('load',this._normal_image_loaded(this));
+		this.normal_image	.bind('load',this._normal_image_loaded());
 		this.normal_image	.attr('src',this.options.images.normal)
 					.attr('alt',this.options.alt)
 					.attr('title',this.options.title)
@@ -196,7 +214,7 @@ $.widget( "ui.fadeover", {
 					.appendTo(this.element);
 		this.over_image_is_loaded=false;
 		this.over_image = $('<img />');
-		this.over_image		.bind('load',this._over_image_loaded(this));
+		this.over_image		.bind('load',this._over_image_loaded());
 		this.over_image		.attr('src',this.options.images.over)
 					.attr('alt',this.options.alt)
 					.attr('title',this.options.title)
@@ -204,10 +222,9 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget-fadeover-over-image')
 					.appendTo(this.overdiv);
 		if (this.options.images.disabled!==null) { 
-
 			this.disabled_image_is_loaded=false;
 			this.disabled_image = $('<img />');
-			this.disabled_image	.bind('load',this._disabled_image_loaded(this));
+			this.disabled_image	.bind('load',this._disabled_image_loaded());
 			this.disabled_image	.attr('src',this.options.images.disabled)
 						.attr('alt',this.options.alt)
 						.attr('title',this.options.title)
@@ -215,6 +232,17 @@ $.widget( "ui.fadeover", {
 						.addClass('ui-widget-fadeover-disabled-image')
 						.appendTo(this.disableddiv);
 
+		}
+		if (this.options.images.active!==null) { 
+			this.active_image_is_loaded=false;
+			this.active_image = $('<img />');
+			this.active_image	.bind('load',this._active_image_loaded());
+			this.active_image	.attr('src',this.options.images.active)
+						.attr('alt',this.options.alt)
+						.attr('title',this.options.title)
+						.addClass('ui-widget')
+						.addClass('ui-widget-fadeover-active-image')
+						.appendTo(this.activediv);
 		}
 	},
 	_setup_content_html: function() { 
@@ -234,26 +262,38 @@ $.widget( "ui.fadeover", {
 	_loaded: function() {
 		this._trigger('ready');
 	},
-	_disabled_image_loaded: function(me) { 
+	_disabled_image_loaded: function() { 
+		var me = this;
 		return function() { 
 			me.disabled_image_is_loaded=true;
-			if (me.over_image_is_loaded && me.normal_image_is_loaded) { 
+			if (me.over_image_is_loaded && me.normal_image_is_loaded && (me.options.images.active===null || me.active_image_is_disabled)) { 
 				me._loaded();
 			}
 		}
 	},
-	_normal_image_loaded: function(me) { 
+	_active_image_loaded: function() { 
+		var me = this;
+		return function() { 
+			me.active_image_is_loaded=true;
+			if (me.over_image_is_loaded && me.normal_image_is_loaded && (me.options.images.disabled===null || me.disabled_image_is_loaded)) { 
+				me._loaded();
+			}
+		}
+	}
+	_normal_image_loaded: function() { 
+		var me = this;
 		return function() { 
 			me.normal_image_is_loaded=true;
-			if (me.over_image_is_loaded && (me.options.images.disabled===null || me.disabled_image_is_loaded)) { 
+			if (me.over_image_is_loaded && (me.options.images.disabled===null || me.disabled_image_is_loaded) && (me.options.images.active===null || me.active_image_is_loaded)) { 
 				me._loaded();
 			}
 		}
 	},
-	_over_image_loaded: function(me) { 
+	_over_image_loaded: function() { 
+		var me = this;
 		return function() { 
 			me.over_image_is_loaded=true;
-			if (me.normal_image_is_loaded && (me.options.images.disabled===null || me.disabled_image_is_loaded)) { 
+			if (me.normal_image_is_loaded && (me.options.images.disabled===null || me.disabled_image_is_loaded) && (me.options.images.active===null || me.active_image_is_loaded)) { 
 				me._loaded();
 			}
 		}
