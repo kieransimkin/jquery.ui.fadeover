@@ -33,6 +33,8 @@ $.widget( "ui.fadeover", {
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
 		out_duration: 600,
+		active_down_duration: 200,
+		active_up_duration: 600,
 		autosize_slide_animate_duration: 200,
 		autosize_fade_animate_duration: 600,
 		images: {
@@ -82,11 +84,46 @@ $.widget( "ui.fadeover", {
 	_bind_events: function() { 
 		this.element.bind('mouseenter.'+this.widgetName, this._mouseenter());
 		this.element.bind('mouseleave.'+this.widgetName, this._mouseleave());
+		this.element.bind('mousedown.'+this.widgetName, this._mousedown());
+		this.element.bind('mouseup.'+this.widgetName, this._mouseup());
 		this.element.bind('click.'+this.widgetName, this._mouseclick());
+	},
+	_mousedown: function() { 
+		var me = this;
+		return function(event) { 
+			if (me.options.disabled) { 
+				return false;
+			}
+			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
+				me.current_effect.stop();
+				me.current_effect=null;
+			}
+			me.current_effect=me.activediv.animate({opacity: 1.0, duration: me.options.active_down_duration, complete: function() { 
+				me.current_effect=null;
+			}});
+		}
+	},
+	_mouseup: function() { 
+		var me = this;
+		return function(event) { 
+			if (me.options.disabled) { 
+				return false;
+			}
+			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
+				me.current_effect.stop();
+				me.current_effect=null;
+			}
+			me.current_effect=me.activediv.animate({opacity: 0.0, duration: me.options.active_up_duration, complete: function() { 
+				me.current_effect=null;
+			}});
+		}
 	},
 	_mouseenter: function() { 
 		var me = this;
 		return function(event) { 
+			if (me.options.disabled) { 
+				return;
+			}
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
 				me.current_effect.stop();
 				me.current_effect=null;
@@ -99,6 +136,9 @@ $.widget( "ui.fadeover", {
 	_mouseleave: function() { 
 		var me = this;
 		return function(event) { 
+			if (me.options.disabled) { 
+				return;
+			}
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
 				me.current_effect.stop();
 				me.current_effect=null;
@@ -256,6 +296,20 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget-fadeover-over-html-content')
 					.html(this.options.html_fragments.over)
 					.appendTo(this.overdiv);
+		if (this.options.html_fragments.disabled!==null) { 
+			this.disabled_html = $('<div></div>')
+						.addClass('ui-widget')
+						.addClass('ui-widget-fadeover-disabled-html-content')
+						.html(this.options.html_fragments.disabled)
+						.appendTo(this.disableddiv);
+		}
+		if (this.options.html_fragments.active!==null) { 
+			this.active_html = $('<div></div>')
+						.addClass('ui-widget')
+						.addClass('ui-widget-fadeover-active-html-content')
+						.html(this.options.html_fragments.active)
+						.appendTo(this.activediv);
+		}
 		// Nothing to load, no need to wait - trigger 'ready' now:
 		this._loaded();
 	},
@@ -311,6 +365,24 @@ $.widget( "ui.fadeover", {
 			}});
 		});
 		normal.src=this.options.images.normal;
+	},
+	has_active: function() { 
+		if (this.is_image() && this.options.images.active!==null) { 
+			return true;
+		} else if (this.is_html() && this.options.html_fragments.active!==null) {
+			return true;	
+		} else { 
+			return false;
+		}
+	},
+	has_disabled: function() { 
+		id (this.is_image() && this.options.images.disabled!==null) { 
+			return true;
+		} else if (this.is_html() && this.options.html_fragments.disabled!==null) { 
+			return true;
+		} else { 
+			return false;
+		}
 	},
 	is_image: function() { 
 		if (this.options.images.normal !== null && this.options.images.over !== null) { 
