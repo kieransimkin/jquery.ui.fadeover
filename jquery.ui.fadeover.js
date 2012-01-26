@@ -170,10 +170,10 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-loader');
 		this.loader_image = $('<img />');
-		this.loader_image		.attr('src',this.options.loading_img)
-						.addClass('ui-widget')
-						.addClass('ui-widget-fadeover-loader-image')
-						.appendTo(this.loaderdiv);
+		this.loader_image	.attr('src',this.options.loading_img)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-loader-image')
+					.appendTo(this.loaderdiv);
 	},
 	_do_html_setup: function() { 
 		this.element.empty();
