@@ -343,6 +343,8 @@ $.widget( "ui.fadeover", {
 		} else {
 			buttonElement.addClass("ui-button-text-only");
 		}
+		// Nothing to load, no need to wait - trigger 'ready' now:
+		this._loaded();
 	},
 	_loaded: function() {
 		this._trigger('ready');
