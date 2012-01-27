@@ -324,13 +324,13 @@ $.widget( "ui.fadeover", {
 		this._loaded();
 	},
 	_setup_content_ui_button: function() { 
-		this.normal_html = $('<div></div>')
+		this.normal_html = $('<button></button>')
 					.appendTo(this.element);
-		this.over_html = $('<div></div>')
+		this.over_html = $('<button></button>')
 					.appendTo(this.overdiv);
-		this.disabled_html = $('<div></div>')
+		this.disabled_html = $('<button></button>')
 					.appendTo(this.disableddiv);
-		this.active_html = $('<div></div>')
+		this.active_html = $('<button></button>')
 					.appendTo(this.activediv);
 		this._create_ui_button_html(this.normal_html,'normal');
 		this._create_ui_button_html(this.over_html,'over');
