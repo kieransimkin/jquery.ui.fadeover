@@ -196,7 +196,7 @@ $.widget( "ui.fadeover", {
 						display: 'block',
 						position: 'absolute',
 						opacity: '0.0',
-						'z-index': 7
+						'z-index': 5
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -208,7 +208,7 @@ $.widget( "ui.fadeover", {
 						display: 'block',
 						position: 'absolute',
 						opacity: '0.0',
-						'z-index': 8
+						'z-index': 4
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -220,7 +220,7 @@ $.widget( "ui.fadeover", {
 						display: 'block',
 						position: 'absolute',
 						opacity: '0.0',
-						'z-index': 9
+						'z-index':3 
 					})
 					.width(this.options.width)
 					.height(this.options.height)
