@@ -96,12 +96,12 @@ $.widget( "ui.fadeover", {
 			if (me.options.disabled) { 
 				return false;
 			}
-			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
-				me.current_effect.stop();
-				me.current_effect=null;
+			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
+				me.current_active_effect.stop();
+				me.current_active_effect=null;
 			}
-			me.current_effect=me.activediv.animate({opacity: 1.0, duration: me.options.active_down_duration, complete: function() { 
-				me.current_effect=null;
+			me.current_active_effect=me.activediv.animate({opacity: 1.0, duration: me.options.active_down_duration, complete: function() { 
+				me.current_active_effect=null;
 			}});
 		}
 	},
@@ -111,12 +111,12 @@ $.widget( "ui.fadeover", {
 			if (me.options.disabled) { 
 				return false;
 			}
-			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
-				me.current_effect.stop();
-				me.current_effect=null;
+			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
+				me.current_active_effect.stop();
+				me.current_active_effect=null;
 			}
-			me.current_effect=me.activediv.animate({opacity: 0.0, duration: me.options.active_up_duration, complete: function() { 
-				me.current_effect=null;
+			me.current_active_effect=me.activediv.animate({opacity: 0.0, duration: me.options.active_up_duration, complete: function() { 
+				me.current_active_effect=null;
 			}});
 		}
 	},
