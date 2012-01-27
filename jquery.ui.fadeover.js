@@ -195,7 +195,8 @@ $.widget( "ui.fadeover", {
 					.css({
 						display: 'block',
 						position: 'absolute',
-						opacity: '0.0'
+						opacity: '0.0',
+						'z-index': 7
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -206,7 +207,8 @@ $.widget( "ui.fadeover", {
 					.css({
 						display: 'block',
 						position: 'absolute',
-						opacity: '0.0'
+						opacity: '0.0',
+						'z-index': 8
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -217,7 +219,8 @@ $.widget( "ui.fadeover", {
 					.css({
 						display: 'block',
 						position: 'absolute',
-						opacity: '0.0'
+						opacity: '0.0',
+						'z-index': 9
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -227,7 +230,8 @@ $.widget( "ui.fadeover", {
 		this.hotspot=$('<div></div>')
 					.css({
 						display: 'block',
-						position: 'absolute'
+						position: 'absolute',
+						'z-index': 10
 					})
 					.width(this.options.width)
 					.height(this.options.height)
