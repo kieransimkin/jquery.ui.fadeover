@@ -74,7 +74,7 @@ $.widget( "ui.fadeover", {
 			this._determine_html_dimensions();
 			return;
 		}
-		if (parseInt(this.options.width)! = this.options.width || parseInt(this.options.height) != this.options.height) { 
+		if (parseInt(this.options.width) != this.options.width || parseInt(this.options.height) != this.options.height) { 
 			alert('FadeOver width and height must be numeric');
 			return;
 		}
