@@ -67,7 +67,7 @@ $.widget( "ui.fadeover", {
 		if (this.is_image() && (this.options.width === null || this.options.height === null)) { 
 			this._determine_image_dimensions();
 			return;
-		} else if (this.is_button() && (this.options.width === null || this.options.height ===null) { 
+		} else if (this.is_button() && (this.options.width === null || this.options.height ===null)) { 
 			this._determine_button_dimensions();
 			return;
 		} else if (this.is_html() && (this.options.width === null || this.options.height === null)) { 
