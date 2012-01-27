@@ -315,10 +315,18 @@ $.widget( "ui.fadeover", {
 		this._loaded();
 	},
 	_setup_content_ui_button: function() { 
-		this._create_ui_button_html(this.element,'normal');
-		this._create_ui_button_html(this.overdiv,'over');
-		this._create_ui_button_html(this.disableddiv,'disabled');
-		this._create_ui_button_html(this.activediv,'active');
+		this.normal_html = $('<div></div>')
+					.appendTo(this.element);
+		this.over_html = $('<div></div>')
+					.appendTo(this.overdiv);
+		this.disabled_html = $('<div></div>')
+					.appendTo(this.disableddiv);
+		this.active_html = $('<div></div>')
+					.appendTo(this.activediv);
+		this._create_ui_button_html(this.normal_html,'normal');
+		this._create_ui_button_html(this.over_html,'over');
+		this._create_ui_button_html(this.disabled_html,'disabled');
+		this._create_ui_button_html(this.active_html,'active');
 		// Nothing to load, no need to wait - trigger 'ready' now:
 		this._loaded();
 	},
