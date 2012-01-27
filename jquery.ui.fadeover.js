@@ -354,7 +354,7 @@ $.widget( "ui.fadeover", {
 		multipleIcons = icons.primary && icons.secondary;
 		if (icons.primary || icons.secondary) {
 			buttonElement.addClass("ui-button-text-icon" +
-			(multipleIcons ? "s" : ""));
+			(multipleIcons ? "s" : (icons.primary ? "-primary" : "-secondary")));
 			if (icons.primary) {
 				buttonElement.prepend("<span class='ui-button-icon-primary ui-icon " + icons.primary + "'></span>");
 			}
