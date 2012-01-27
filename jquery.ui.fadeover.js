@@ -191,27 +191,6 @@ $.widget( "ui.fadeover", {
 			this.element.css({cursor: 'pointer'});
 			this.element.attr('role','button');
 		}
-		this.hotspot=$('<div></div>')
-					.css({
-						display: 'block',
-						position: 'absolute'
-					})
-					.width(this.options.width)
-					.height(this.options.height)
-					.addClass('ui-widget')
-					.addClass('ui-widget-fadeover-hotspot')
-					.appendTo(this.element);
-		this.overdiv=$('<div></div>')
-					.css({
-						display: 'block',
-						position: 'absolute',
-						opacity: '0.0'
-					})
-					.width(this.options.width)
-					.height(this.options.height)
-					.addClass('ui-widget')
-					.addClass('ui-widget-fadeover-over')
-					.appendTo(this.element);
 		this.disableddiv=$('<div></div>')
 					.css({
 						display: 'block',
@@ -233,6 +212,27 @@ $.widget( "ui.fadeover", {
 					.height(this.options.height)
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-active')
+					.appendTo(this.element);
+		this.overdiv=$('<div></div>')
+					.css({
+						display: 'block',
+						position: 'absolute',
+						opacity: '0.0'
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-over')
+					.appendTo(this.element);
+		this.hotspot=$('<div></div>')
+					.css({
+						display: 'block',
+						position: 'absolute'
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-hotspot')
 					.appendTo(this.element);
 		if (this.is_image()) { 
 			this._setup_content_image();
