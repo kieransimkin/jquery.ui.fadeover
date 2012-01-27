@@ -417,13 +417,13 @@ $.widget( "ui.fadeover", {
 		this._create_sizer_div();
 		this.sizerdiv.html(this.options.html_fragments.normal);
 		this._set_size_from_sizer_div();
-		me._create();
+		this._create();
 	},
 	_determine_button_dimensions: function() { 
 		this._create_sizer_div();
 		this._create_ui_button_html(this.sizerdiv,'normal');
 		this._set_size_from_sizer_div();
-		me._create();
+		this._create();
 	},
 	_set_size_from_sizer_div: function() {
 		this.options.width=this.sizerdiv.width();
