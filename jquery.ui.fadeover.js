@@ -32,7 +32,7 @@ $.widget( "ui.fadeover", {
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
 		out_duration: 600,
-		active_down_duration: 50,
+		active_down_duration: false,
 		active_up_duration: 600,
 		autosize_slide_animate_duration: 200,
 		autosize_fade_animate_duration: 600,
@@ -100,9 +100,13 @@ $.widget( "ui.fadeover", {
 				me.current_active_effect.stop();
 				me.current_active_effect=null;
 			}
-			me.current_active_effect=me.activediv.animate({opacity: 1.0, duration: me.options.active_down_duration, complete: function() { 
-				me.current_active_effect=null;
-			}});
+			if (me.options.active_down_duration===false) { 
+				me.activediv.css({opacity: 1.0});
+			} else {
+				me.current_active_effect=me.activediv.animate({opacity: 1.0, duration: me.options.active_down_duration, complete: function() { 
+					me.current_active_effect=null;
+				}});
+			}
 		}
 	},
 	_mouseup: function() { 
@@ -429,18 +433,22 @@ $.widget( "ui.fadeover", {
 		this._create_sizer_div();
 		this.sizerdiv.html(this.options.html_fragments.normal);
 		this._set_size_from_sizer_div();
-		this._create();
 	},
 	_determine_button_dimensions: function() { 
 		this._create_sizer_div();
 		this._create_ui_button_html(this.sizerdiv,'normal');
 		this._set_size_from_sizer_div();
-		this._create();
 	},
 	_set_size_from_sizer_div: function() {
 		this.options.width=this.sizerdiv.width();
 		this.options.height=this.sizerdiv.height();
 		this.sizerdiv.remove();
+		this.element.css({opacity: '0.0'});
+		var me = this;
+		this.element.animate({width: this.options.width+'px', height: this.options.height+'px'},{duration: this.options.autosize_slide_animate_duration, complete: function() { 
+			me._create();
+			me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
+		}});
 	},
 	_create_sizer_div: function() { 
 		this.sizerdiv=$('<div></div>')
