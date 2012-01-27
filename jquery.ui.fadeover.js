@@ -353,8 +353,6 @@ $.widget( "ui.fadeover", {
 		var icons = this.options.ui_button.icons,
 		multipleIcons = icons.primary && icons.secondary;
 		if (icons.primary || icons.secondary) {
-			buttonElement.addClass("ui-button-text-icon" +
-			(multipleIcons ? "s" : (icons.primary ? "-primary" : "-secondary")));
 			if (icons.primary) {
 				buttonElement.prepend("<span class='ui-button-icon-primary ui-icon " + icons.primary + "'></span>");
 			}
@@ -368,6 +366,9 @@ $.widget( "ui.fadeover", {
 				if (!this.hasTitle) {
 					buttonElement.attr("title", buttonText);
 				}
+			} else { 
+				buttonElement.addClass("ui-button-text-icon" +
+				(multipleIcons ? "s" : (icons.primary ? "-primary" : "-secondary")));
 			}
 		} else {
 			buttonElement.addClass("ui-button-text-only");
