@@ -1,4 +1,3 @@
- * Support not specifying the size for HTML fragment type by using the render engine to work out the size in a back buffer
  * Make an easy way to have the mouseover div identical to the normal div but with one extra CSS class
  * Allow the initial contents of this.element to be used for the normal div 
  * Add 'down' state for on mousedown
