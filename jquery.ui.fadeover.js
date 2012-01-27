@@ -32,7 +32,7 @@ $.widget( "ui.fadeover", {
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
 		out_duration: 600,
-		active_down_duration: 200,
+		active_down_duration: 50,
 		active_up_duration: 600,
 		autosize_slide_animate_duration: 200,
 		autosize_fade_animate_duration: 600,
