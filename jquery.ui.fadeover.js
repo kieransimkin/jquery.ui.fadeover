@@ -61,18 +61,21 @@ $.widget( "ui.fadeover", {
 	},
 	_create: function() { 
 		if (this.options.title===null) { 
-			this.options.title=this.options.alt;
+			this.options.title = this.options.alt;
 		}
 		var preload_loader = new Image();
-		preload_loader.src=this.options.loading_img;
+		preload_loader.src = this.options.loading_img;
 		if (this.is_image() && (this.options.width === null || this.options.height === null)) { 
 			this._determine_image_dimensions();
 			return;
+		} else if (this.is_button() && (this.options.width === null || this.options.height ===null) { 
+			this._determine_button_dimensions();
+			return;
 		} else if (this.is_html() && (this.options.width === null || this.options.height === null)) { 
-			alert('No size specified for HTML FadeOver widget.');
+			this._determine_html_dimensions();
 			return;
 		}
-		if (parseInt(this.options.width)!=this.options.width || parseInt(this.options.height)!=this.options.height) { 
+		if (parseInt(this.options.width)! = this.options.width || parseInt(this.options.height) != this.options.height) { 
 			alert('FadeOver width and height must be numeric');
 			return;
 		}
@@ -387,17 +390,23 @@ $.widget( "ui.fadeover", {
 	},
 	_determine_image_dimensions: function() { 
 		var normal = new Image();
-		var me=this;
+		var me = this;
 		$(normal).bind("load", function() { 
-			me.options.width=this.width;
-			me.options.height=this.height;
+			me.options.width = this.width;
+			me.options.height = this.height;
 			me.element.css({opacity: '0.0'});
 			me.element.animate({width: this.width+'px', height: this.height+'px'},{duration: me.options.autosize_slide_animate_duration, complete: function() { 
 				me._create();
 				me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
 			}});
 		});
-		normal.src=this.options.images.normal;
+		normal.src = this.options.images.normal;
+	},
+	_determine_html_dimensions: function() { 
+		me._create();
+	},
+	_determine_button_dimensions: function() { 
+		me._create();
 	},
 	has_active: function() { 
 		if (this.is_image() && this.options.images.active!==null) { 
