@@ -366,6 +366,7 @@ $.widget( "ui.fadeover", {
 				if (!this.hasTitle) {
 					buttonElement.attr("title", buttonText);
 				}
+				buttonText.html('&nbsp;');
 			} else { 
 				buttonElement.addClass("ui-button-text-icon" +
 				(multipleIcons ? "s" : (icons.primary ? "-primary" : "-secondary")));
