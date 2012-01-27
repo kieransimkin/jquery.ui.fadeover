@@ -59,6 +59,7 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	_create: function() { 
+		this.orightml=this.element.html();
 		if (this.options.title===null) { 
 			this.options.title = this.options.alt;
 		}
@@ -339,6 +340,9 @@ $.widget( "ui.fadeover", {
 		this._loaded();
 	},
 	_create_ui_button_html: function (container,state) { 
+		if (this.options.ui_button.label === null) {
+			this.options.ui_button.label = this.orightml;
+		}
 		var buttonElement = container,
 		buttonText = $("<span></span>")
 			.addClass("ui-button-text")
