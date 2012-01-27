@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all" />
 </head>
 <body>
+<div id="switcher"></div>
+<br style="clear: both;" />
 <div id="fadeover_1">UI Button</div><!-- This is the actual container of the widget -->
 <script>
 	$('#fadeover_1').fadeover({
@@ -20,6 +22,15 @@
 		}
 	});
 </script>
+<script type="text/javascript"
+  src="http://jqueryui.com/themeroller/themeswitchertool/">
+</script>
+<script>
+  $(document).ready(function(){
+    $('#switcher').themeswitcher();
+  });
+</script>
+
 <br style="clear: both;" />
 <a href="http://slinq.com/software/fadeover">FadeOver by Kieran Simkin</a><br />
 <a href=".">Return to examples list</a>
