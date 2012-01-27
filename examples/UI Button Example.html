@@ -44,9 +44,22 @@
 	});
 </script>
 <br style="clear: both;" />
-<small><div id="fadeover_4"></div></small><!-- This is the actual container of the widget -->
+<div id="fadeover_4"></div><!-- This is the actual container of the widget -->
 <script>
 	$('#fadeover_4').fadeover({
+		ui_button: { 
+			enabled: true,
+			icons: {
+				primary: 'ui-icon-lock'
+			},
+			text: false
+		}
+	});
+</script>
+<br style="clear: both;" />
+<small><div id="fadeover_5"></small></div><!-- This is the actual container of the widget -->
+<script>
+	$('#fadeover_5').fadeover({
 		ui_button: { 
 			enabled: true,
 			icons: {
