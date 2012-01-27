@@ -365,7 +365,7 @@ $.widget( "ui.fadeover", {
 				me._loaded();
 			}
 		}
-	}
+	},
 	_normal_image_loaded: function() { 
 		var me = this;
 		return function() { 
