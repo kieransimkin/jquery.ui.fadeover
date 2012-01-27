@@ -1,5 +1,4 @@
  * Make an easy way to have the mouseover div identical to the normal div but with one extra CSS class
  * Allow the initial contents of this.element to be used for the normal div 
- * Add 'down' state for on mousedown
  * It'd be nice to be able to use Faceover as a drop-in replacement for the standard UI button widget. This would probably be fairly easy - a wrapper function.
  * It'd also be nice to be able to use FadeOver in place of the :hover CSS on all the standard UI widgets
