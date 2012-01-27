@@ -186,7 +186,6 @@ $.widget( "ui.fadeover", {
 					})
 					.width(this.options.width)
 					.height(this.options.height)
-					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover');
 		if (this.options.clickable && !this.options.disabled) { 
 			this.element.css({cursor: 'pointer'});
@@ -316,13 +315,21 @@ $.widget( "ui.fadeover", {
 		this._loaded();
 	},
 	_setup_content_ui_button: function() { 
-		var buttonElement = this.element,
+		this._create_ui_button_html(this.element,'normal');
+		this._create_ui_button_html(this.overdiv,'over');
+		this._create_ui_button_html(this.disableddiv,'disabled');
+		this._create_ui_button_html(this.activediv,'active');
+		// Nothing to load, no need to wait - trigger 'ready' now:
+		this._loaded();
+	},
+	_create_ui_button_html: function (container,state) { 
+		var buttonElement = container,
 		buttonText = $("<span></span>")
 			.addClass("ui-button-text")
 			.html(this.options.ui_button.label)
 			.appendTo(buttonElement.empty())
 			.text();
-
+		buttonElement.addClass('ui-button ui-widget ui-state-default ui-corner-all');
 		var icons = this.options.ui_button.icons,
 		multipleIcons = icons.primary && icons.secondary;
 		if (icons.primary || icons.secondary) {
@@ -345,8 +352,13 @@ $.widget( "ui.fadeover", {
 		} else {
 			buttonElement.addClass("ui-button-text-only");
 		}
-		// Nothing to load, no need to wait - trigger 'ready' now:
-		this._loaded();
+		if (state=='over') { 
+			buttonElement.addClass("ui-state-hover");
+		} else if (state=='active') { 
+			buttonElement.addClass("ui-state-active");
+		} else if (state=='disabled') { 
+			buttonElement.addClass("ui-state-disabled");
+		}
 	},
 	_loaded: function() {
 		this._trigger('ready');
@@ -401,11 +413,31 @@ $.widget( "ui.fadeover", {
 		});
 		normal.src = this.options.images.normal;
 	},
-	_determine_html_dimensions: function() { 
+	_determine_html_dimensions: function() {
+		this._create_sizer_div();
+		this.sizerdiv.html(this.options.html_fragments.normal);
+		this._set_size_from_sizer_div();
 		me._create();
 	},
 	_determine_button_dimensions: function() { 
+		this._create_sizer_div();
+		this._create_ui_button_html(this.sizerdiv,'normal');
+		this._set_size_from_sizer_div();
 		me._create();
+	},
+	_set_size_from_sizer_div: function() {
+		this.options.width=this.sizerdiv.width();
+		this.options.height=this.sizerdiv.height();
+		this.sizerdiv.remove();
+	},
+	_create_sizer_div: function() { 
+		this.sizerdiv=$('<div></div>')
+					.css({
+						position: 'absolute',
+						display: 'block',
+						visibility: 'hidden'
+					})
+					.appendTo(this.element);
 	},
 	has_active: function() { 
 		if (this.is_image() && this.options.images.active!==null) { 
