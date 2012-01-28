@@ -314,7 +314,6 @@ $.widget( "ui.fadeover", {
 		this.normal_image	.attr('src',this.options.images.normal)
 					.attr('alt',this.options.alt)
 					.attr('title',this.options.title)
-					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-normal-image')
 					.appendTo(this.normaldiv);
 		this.over_image_is_loaded=false;
@@ -323,7 +322,6 @@ $.widget( "ui.fadeover", {
 		this.over_image		.attr('src',this.options.images.over)
 					.attr('alt',this.options.alt)
 					.attr('title',this.options.title)
-					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-over-image')
 					.appendTo(this.overdiv);
 		if (this.options.images.disabled!==null) { 
@@ -333,7 +331,6 @@ $.widget( "ui.fadeover", {
 			this.disabled_image	.attr('src',this.options.images.disabled)
 						.attr('alt',this.options.alt)
 						.attr('title',this.options.title)
-						.addClass('ui-widget')
 						.addClass('ui-widget-fadeover-disabled-image')
 						.appendTo(this.disableddiv);
 
@@ -345,32 +342,27 @@ $.widget( "ui.fadeover", {
 			this.active_image	.attr('src',this.options.images.active)
 						.attr('alt',this.options.alt)
 						.attr('title',this.options.title)
-						.addClass('ui-widget')
 						.addClass('ui-widget-fadeover-active-image')
 						.appendTo(this.activediv);
 		}
 	},
 	_setup_content_html: function() { 
 		this.normal_html = $('<div></div>')
-					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-html-content')
 					.html(this.options.html_fragments.normal)
 					.appendTo(this.normaldiv);
 		this.over_html = $('<div></div>')
-					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-over-html-content')
 					.html(this.options.html_fragments.over)
 					.appendTo(this.overdiv);
 		if (this.options.html_fragments.disabled!==null) { 
 			this.disabled_html = $('<div></div>')
-						.addClass('ui-widget')
 						.addClass('ui-widget-fadeover-disabled-html-content')
 						.html(this.options.html_fragments.disabled)
 						.appendTo(this.disableddiv);
 		}
 		if (this.options.html_fragments.active!==null) { 
 			this.active_html = $('<div></div>')
-						.addClass('ui-widget')
 						.addClass('ui-widget-fadeover-active-html-content')
 						.html(this.options.html_fragments.active)
 						.appendTo(this.activediv);
