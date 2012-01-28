@@ -98,10 +98,14 @@
 	});
 </script>
 <br style="clear: both;" />
-<a href="#" onclick="$('.fadeover').fadeover('disable'); return false;">Disable Controls</a> - <a href="#" onclick="$('.fadeover').fadeover('enable'); return false;">Enable Controls</a>
+<a id="disablebutton" href="#" onclick="$('.fadeover').fadeover('disable'); return false;">Disable Controls</a> - <a href="#" onclick="$('.fadeover').fadeover('enable'); return false;" id="enablebutton">Enable Controls</a>
 <br style="clear: both;" />
 &nbsp;
 <br style="clear: both;" />
+<script type="text/javascript">
+$('#disablebutton').button();
+$('#enablebutton').button();
+</script>
 <script type="text/javascript"
   src="http://jqueryui.com/themeroller/themeswitchertool/">
 </script>
