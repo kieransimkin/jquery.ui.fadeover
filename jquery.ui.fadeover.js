@@ -27,7 +27,7 @@ $.widget( "ui.fadeover", {
 		height: null,
 		alt: '',
 		title: null,
-		disabled: false,
+		disabled: true,
 		clickable: true,
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
@@ -127,7 +127,7 @@ $.widget( "ui.fadeover", {
 			}});
 		}
 	},
-	_set_disabled: function() { 
+	_set_disabled: function(callback) { 
 		var me = this;
 		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
 			me.current_disabled_effect.stop();
@@ -138,6 +138,9 @@ $.widget( "ui.fadeover", {
 			me.current_normal_disabled_effect=null;
 		}
 		me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0, duration: me.options.disable_duration, complete: function() { 
+				if (typeof(callback)=='function') { 
+					callback();
+				}
 				me.current_disabled_effect=null;
 		}});
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 0.0, duration: me.options.disable_duration});
@@ -426,7 +429,13 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	_loaded: function() {
-		this._trigger('ready');
+		if (this.options.disabled) { 
+			this._set_disabled(function() { 
+				this._trigger('ready');
+			});		
+		} else { 
+			this._trigger('ready');
+		}
 	},
 	_disabled_image_loaded: function() { 
 		var me = this;
