@@ -27,7 +27,7 @@ $.widget( "ui.fadeover", {
 		height: null,
 		alt: '',
 		title: null,
-		disabled: true,
+		disabled: false,
 		clickable: true,
 		loading_img: 'ajaxloader.gif',
 		over_duration: 200,
@@ -429,7 +429,7 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	_loaded: function() {
-		if (this.options.disabled) { 
+		if (this.options.disabled && this.has_disabled()) { 
 			this._set_disabled(function() { 
 				this._trigger('ready');
 			});		
