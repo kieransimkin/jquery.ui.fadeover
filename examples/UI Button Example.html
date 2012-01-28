@@ -110,7 +110,9 @@ $('#enablebutton').button({icons: {primary: 'ui-icon-gear',secondary:'ui-icon-tr
 </script>
 <script>
   $(document).ready(function(){
-    $('#switcher').themeswitcher({loadTheme: 'ui-darkness'});
+    $('#switcher').themeswitcher({loadTheme: 'ui-darkness', onSelect: function() { 
+	$('.fadeover').fadeover('refresh');
+}});
   });
 </script>
 

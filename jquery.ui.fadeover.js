@@ -95,6 +95,13 @@ $.widget( "ui.fadeover", {
 		this.element.bind('mouseup.'+this.widgetName, this._mouseup());
 		this.element.bind('click.'+this.widgetName, this._mouseclick());
 	},
+	_unbind_events: function() {
+		this.element.unbind('mouseenter.'+this.widgetName, this._mouseenter());
+		this.element.unbind('mouseleave.'+this.widgetName, this._mouseleave());
+		this.element.unbind('mousedown.'+this.widgetName, this._mousedown());
+		this.element.unbind('mouseup.'+this.widgetName, this._mouseup());
+		this.element.unbind('click.'+this.widgetName, this._mouseclick());
+	},
 	_mousedown: function() { 
 		var me = this;
 		return function(event) { 
@@ -226,8 +233,6 @@ $.widget( "ui.fadeover", {
 						display: 'block',
 						position: 'relative'
 					})
-					.width(this.options.width)
-					.height(this.options.height)
 					.addClass('ui-widget-fadeover');
 		if (this.options.clickable && !this.options.disabled) { 
 			this.element.css({cursor: 'pointer'});
@@ -616,7 +621,18 @@ $.widget( "ui.fadeover", {
 
 		$.Widget.prototype._setOption.apply( this, arguments );
 	},
+	_destroy: function() {
+		this._unbind_events();
+		this.element.html(this.orightml);
+		this.removeClass('ui-widget-fadeover').removeAttr('role').removeAttr('aria-pressed');
+
+	},
+	refresh: function() {
+		this._destroy();
+		this._create();
+	},
 	destroy: function() { 
+		this._destroy();
 		$.Widget.prototype.destroy.call( this );	
 	}
 });
