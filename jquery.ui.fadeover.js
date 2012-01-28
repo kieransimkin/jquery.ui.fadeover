@@ -510,8 +510,9 @@ $.widget( "ui.fadeover", {
 		this._set_size_from_sizer_div();
 	},
 	_set_size_from_sizer_div: function() {
-		this.options.width=this.sizerdiv.width();
-		this.options.height=this.sizerdiv.height();
+		// TODO the +1s below are a nasty hack to fix UI button sizing coming out a little under :/
+		this.options.width=this.sizerdiv.width()+1;
+		this.options.height=this.sizerdiv.height()+1;
 		this.sizerdiv.remove();
 		this.element.css({opacity: '0.0'});
 		var me = this;
