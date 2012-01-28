@@ -343,7 +343,7 @@ $.widget( "ui.fadeover", {
 	},
 	_setup_content_html: function() { 
 		this.normal_html = $('<div></div>')
-					.addClass('ui-widget-fadeover-html-content')
+					.addClass('ui-widget-fadeover-normal-html-content')
 					.html(this.options.html_fragments.normal)
 					.appendTo(this.normaldiv);
 		this.over_html = $('<div></div>')
@@ -367,12 +367,16 @@ $.widget( "ui.fadeover", {
 	},
 	_setup_content_ui_button: function() { 
 		this.normal_html = $('<div></div>')
+					.addClass('ui-widget-fadeover-normal-button-content')
 					.appendTo(this.normaldiv);
 		this.over_html = $('<div></div>')
+					.addClass('ui-widget-fadeover-over-button-content')
 					.appendTo(this.overdiv);
 		this.disabled_html = $('<div></div>')
+					.addClass('ui-widget-fadeover-disabled-button-content')
 					.appendTo(this.disableddiv);
 		this.active_html = $('<div></div>')
+					.addClass('ui-widget-fadeover-active-button-content')
 					.appendTo(this.activediv);
 		this._create_ui_button_html(this.normal_html,'normal');
 		this._create_ui_button_html(this.over_html,'over');
@@ -492,12 +496,12 @@ $.widget( "ui.fadeover", {
 	},
 	_determine_html_dimensions: function() {
 		this._create_sizer_div();
-		this.sizercontainerdiv.html(this.options.html_fragments.normal);
+		$('<div></div>').addClass('ui-widget-fadeover-html-content').html(this.options.html_fragments.normal).appendTo(this.sizercontainerdiv);
 		this._set_size_from_sizer_div();
 	},
 	_determine_button_dimensions: function() { 
 		this._create_sizer_div();
-		this._create_ui_button_html(this.sizercontainerdiv,'normal');
+		this._create_ui_button_html( $('<div></div>').addClass('ui-widget-fadeover-normal-button-content').appendTo(this.sizercontainerdiv),'normal');
 		this._set_size_from_sizer_div();
 	},
 	_determine_css_dimensions: function() { 
@@ -589,7 +593,7 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	is_anything: function() { 
-		if (this.is_image() || this.is_html() || this.is_button()) { 
+		if (this.is_image() || this.is_html() || this.is_button() || this.is_css()) { 
 			return true;
 		} else { 
 			return false;
