@@ -9,6 +9,22 @@
 </head>
 <body>
 <div id="fadeover_1">Hey!</div><!-- This is the actual container of the widget -->
+<style type="text/css">
+	#fadeover_1 .ui-widget-fadeover-over {
+		background-color: white;
+		text-color: red;
+	}
+	#fadeover_1 .ui-widget-fadeover-normal { 
+		background-color: white;
+		text-color: green;
+	}
+	#fadeover_1 .ui-widget-fadeover-active { 
+		text-color: blue;
+	}
+	#fadeover_1 .ui-widget-fadeover-disabled { 
+		text-color: gray;
+	}
+</style>
 <script>
 	$('#fadeover_1').fadeover();
 </script>
