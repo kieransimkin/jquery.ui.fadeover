@@ -147,10 +147,11 @@ $.widget( "ui.fadeover", {
 			me.current_normal_disabled_effect=null;
 		}
 		me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0, duration: me.options.disable_duration, complete: function() { 
-				if (typeof(callback)=='function') { 
-					callback();
-				}
-				me.current_disabled_effect=null;
+			this.element.css({cursor: 'default'});
+			if (typeof(callback)=='function') { 
+				callback();
+			}
+			me.current_disabled_effect=null;
 		}});
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 0.0, duration: me.options.disable_duration});
 	},
@@ -166,6 +167,7 @@ $.widget( "ui.fadeover", {
 		}
 		me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0, duration: me.options.enable_duration, complete: function() { 
 			me.current_disabled_effect=null;
+			this.element.css({cursor: 'pointer'});
 		}});
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 1.0, duration: me.options.disable_duration});
 	},
