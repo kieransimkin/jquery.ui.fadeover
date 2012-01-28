@@ -265,6 +265,17 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-hotspot')
 					.appendTo(this.element);
+		this.normaldiv=$('<div></div>')
+					.css({
+						display: 'block',
+						position: 'relative',
+						'z-index': 1
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-normal')
+					.appendTo(this.element);
 		if (this.is_image()) { 
 			this._setup_content_image();
 		} else if (this.is_html()) { 
@@ -283,7 +294,7 @@ $.widget( "ui.fadeover", {
 					.attr('title',this.options.title)
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-normal-image')
-					.appendTo(this.element);
+					.appendTo(this.normaldiv);
 		this.over_image_is_loaded=false;
 		this.over_image = $('<img />');
 		this.over_image		.bind('load',this._over_image_loaded());
@@ -322,7 +333,7 @@ $.widget( "ui.fadeover", {
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-html-content')
 					.html(this.options.html_fragments.normal)
-					.appendTo(this.element);
+					.appendTo(this.normaldiv);
 		this.over_html = $('<div></div>')
 					.addClass('ui-widget')
 					.addClass('ui-widget-fadeover-over-html-content')
@@ -347,7 +358,7 @@ $.widget( "ui.fadeover", {
 	},
 	_setup_content_ui_button: function() { 
 		this.normal_html = $('<button></button>')
-					.appendTo(this.element);
+					.appendTo(this.normaldiv);
 		this.over_html = $('<button></button>')
 					.appendTo(this.overdiv);
 		this.disabled_html = $('<button></button>')
