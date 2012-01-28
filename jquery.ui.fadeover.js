@@ -129,27 +129,23 @@ $.widget( "ui.fadeover", {
 	},
 	_set_disabled: function() { 
 		var me = this;
-		return function(event) { 
-			if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
-				me.current_disabled_effect.stop();
-				me.current_disabled_effect=null;
-			}
-			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0, duration: me.options.disable_duration, complete: function() { 
-					me.current_disabled_effect=null;
-			}});
+		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
+			me.current_disabled_effect.stop();
+			me.current_disabled_effect=null;
 		}
+		me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0, duration: me.options.disable_duration, complete: function() { 
+				me.current_disabled_effect=null;
+		}});
 	},
 	_unset_disabled: function() { 
 		var me = this;
-		return function(event) { 
-			if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
-				me.current_disabled_effect.stop();
-				me.current_disabled_effect=null;
-			}
-			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0, duration: me.options.enable_duration, complete: function() { 
-				me.current_disabled_effect=null;
-			}});
+		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
+			me.current_disabled_effect.stop();
+			me.current_disabled_effect=null;
 		}
+		me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0, duration: me.options.enable_duration, complete: function() { 
+			me.current_disabled_effect=null;
+		}});
 	},
 	_mouseenter: function() { 
 		var me = this;
