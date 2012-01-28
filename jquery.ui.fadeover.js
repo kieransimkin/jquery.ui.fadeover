@@ -76,6 +76,8 @@ $.widget( "ui.fadeover", {
 		} else if (this.is_html() && (this.options.width === null || this.options.height === null)) { 
 			this._determine_html_dimensions();
 			return;
+		} else if (this.is_css() && (this.options.width === null || this.options.height === null)) { 
+			this._determine_css_dimensions();
 		}
 		if (parseInt(this.options.width) != this.options.width || parseInt(this.options.height) != this.options.height) { 
 			alert('FadeOver width and height must be numeric');
@@ -295,6 +297,8 @@ $.widget( "ui.fadeover", {
 			this._setup_content_html();
 		} else if (this.is_button()) { 
 			this._setup_content_ui_button();
+		} else if (this.is_css()) { 
+			this._setup_content_css();
 		}
 
 	},
@@ -383,6 +387,13 @@ $.widget( "ui.fadeover", {
 		this._create_ui_button_html(this.disabled_html,'disabled');
 		this._create_ui_button_html(this.active_html,'active');
 		// Nothing to load, no need to wait - trigger 'ready' now:
+		this._loaded();
+	},
+	_setup_content_css: function() { 
+		jQuery(this.orightml).appendTo(this.normaldiv);
+		jQuery(this.orightml).appendTo(this.overdiv);
+		jQuery(this.orightml).appendTo(this.disableddiv);
+		jQuery(this.orightml).appendTo(this.activediv);
 		this._loaded();
 	},
 	_create_ui_button_html: function (container,state) { 
@@ -497,6 +508,11 @@ $.widget( "ui.fadeover", {
 		this._create_ui_button_html(this.sizerdiv,'normal');
 		this._set_size_from_sizer_div();
 	},
+	_determine_css_dimensions: function() { 
+		this._create_sizer_div();
+		this.sizerdiv.html(this.orightml);
+		this._set_size_from_sizer_div();
+	},
 	_set_size_from_sizer_div: function() {
 		this.options.width=this.sizerdiv.width();
 		this.options.height=this.sizerdiv.height();
@@ -564,6 +580,17 @@ $.widget( "ui.fadeover", {
 			return true;
 		} else { 
 			return false;
+		}
+	},
+	is_css: function() { 
+		if (this.is_image()) { 
+			return false;
+		} else if (this.is_html()) { 
+			return false;
+		} else if (this.is_button()) { 
+			return false;
+		} else { 
+			return true;
 		}
 	},
 	is_anything: function() { 
