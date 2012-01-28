@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<title>CSS Custom Button Example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.fadeover.js"></script>
+</head>
+<body>
+<div id="fadeover_1">Hey!</div><!-- This is the actual container of the widget -->
+<style type="text/css">
+	#fadeover_1 .ui-widget-fadeover-container-div { 
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		background-color: white;
+		border: 1px solid black;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	#fadeover_1 .ui-widget-fadeover-over {
+		color: red;
+	}
+	#fadeover_1 .ui-widget-fadeover-normal { 
+		color: green;
+	}
+	#fadeover_1 .ui-widget-fadeover-active { 
+		color: blue;
+	}
+	#fadeover_1 .ui-widget-fadeover-disabled { 
+		color: gray;
+	}
+</style>
+<script>
+	$('#fadeover_1').fadeover();
+</script>
+<br style="clear: both;" />
+<a href="#" onclick="$('#fadeover_1').fadeover('disable'); return false;">Disable Control</a> - <a href="#" onclick="$('#fadeover_1').fadeover('enable'); return false;">Enable Control</a>
+<br style="clear: both;" />
+&nbsp;
+<br style="clear: both;" />
+<a href="http://slinq.com/software/fadeover">FadeOver by Kieran Simkin</a><br />
+<a href=".">Return to examples list</a>
+<br style="clear: both;" />
+Button images from <a href="http://mygimptutorial.com/web-20-button-with-reflection" target="_blank">mygimptutorial.com</a>.
+</body>
+</html>
