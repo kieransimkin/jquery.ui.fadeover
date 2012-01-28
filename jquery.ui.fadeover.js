@@ -391,11 +391,10 @@ $.widget( "ui.fadeover", {
 		this._loaded();
 	},
 	_setup_content_css: function() { 
-		console.log(this.orightml);
-		jQuery(this.orightml).appendTo(this.normaldiv);
-		jQuery(this.orightml).appendTo(this.overdiv);
-		jQuery(this.orightml).appendTo(this.disableddiv);
-		jQuery(this.orightml).appendTo(this.activediv);
+		this.normaldiv.append(this.orightml);
+		this.overdiv.append(this.orightml);
+		this.disableddiv.append(this.orightml);
+		this.activediv.append(this.orightml);
 		this._loaded();
 	},
 	_create_ui_button_html: function (container,state) { 
