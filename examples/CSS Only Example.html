@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<title>CSS-only example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.fadeover.js"></script>
+</head>
+<body>
+<div id="fadeover_1">Hey!</div><!-- This is the actual container of the widget -->
+<script>
+	$('#fadeover_1').fadeover();
+</script>
+<br style="clear: both;" />
+<a href="#" onclick="$('#fadeover_1').fadeover('disable'); return false;">Disable Control</a> - <a href="#" onclick="$('#fadeover_1').fadeover('enable'); return false;">Enable Control</a>
+<br style="clear: both;" />
+&nbsp;
+<br style="clear: both;" />
+<a href="http://slinq.com/software/fadeover">FadeOver by Kieran Simkin</a><br />
+<a href=".">Return to examples list</a>
+</body>
+</html>
