@@ -8,7 +8,6 @@
 <script src="../jquery.ui.fadeover.js"></script>
 </head>
 <body>
-<div id="fadeover_1">Hey!</div><!-- This is the actual container of the widget -->
 <style type="text/css">
 	#fadeover_1 .ui-widget-fadeover-container-div { 
 		background-image: url('empty_button_normal.png');
@@ -29,8 +28,10 @@
 		background-image: url('empty_button_disabled.png');
 	}
 </style>
+<div id="fadeover_1" class="fadeover">Button 1</div><!-- This is the actual container of the widget -->
+<div id="fadeover_2" class="fadeover">Button 2</div><!-- This is the actual container of the widget -->
 <script>
-	$('#fadeover_1').fadeover({width: 150, height: 57});
+	$('.fadeover').fadeover({width: 150, height: 57});
 </script>
 <br style="clear: both;" />
 <a href="#" onclick="$('#fadeover_1').fadeover('disable'); return false;">Disable Control</a> - <a href="#" onclick="$('#fadeover_1').fadeover('enable'); return false;">Enable Control</a>
