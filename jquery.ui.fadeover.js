@@ -629,8 +629,6 @@ $.widget( "ui.fadeover", {
 	},
 	refresh: function() {
 		this._destroy();
-		console.log("got here");
-		return;
 		this._create();
 	},
 	destroy: function() { 
