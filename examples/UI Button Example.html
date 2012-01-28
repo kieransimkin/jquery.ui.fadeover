@@ -112,6 +112,7 @@ $('#enablebutton').button({icons: {primary: 'ui-icon-gear',secondary:'ui-icon-tr
   $(document).ready(function(){
     $('#switcher').themeswitcher({loadTheme: 'ui-darkness', onSelect: function() { 
 	$('.fadeover').fadeover('refresh');
+	return false;
 }});
   });
 </script>
