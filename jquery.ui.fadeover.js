@@ -521,11 +521,11 @@ $.widget( "ui.fadeover", {
 	_set_size_from_sizer_div: function() {
 		this.options.width=this.sizerdiv.width();
 		this.options.height=this.sizerdiv.height();
-		this.sizerdiv.remove();
+		//this.sizerdiv.remove();
 		this.element.css({opacity: '0.0'});
 		var me = this;
 		this.element.animate({width: this.options.width+'px', height: this.options.height+'px'},{duration: this.options.autosize_slide_animate_duration, complete: function() { 
-			me._create();
+			//me._create();
 			me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
 		}});
 	},
