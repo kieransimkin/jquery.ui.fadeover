@@ -470,6 +470,8 @@ $.widget( "ui.fadeover", {
 			return true;
 		} else if (this.is_html() && this.options.html_fragments.active!==null) {
 			return true;	
+		} else if (this.is_button()) { 
+			return true;
 		} else { 
 			return false;
 		}
@@ -478,6 +480,8 @@ $.widget( "ui.fadeover", {
 		if (this.is_image() && this.options.images.disabled!==null) { 
 			return true;
 		} else if (this.is_html() && this.options.html_fragments.disabled!==null) { 
+			return true;
+		} else if (this.is_button()) { 
 			return true;
 		} else { 
 			return false;
