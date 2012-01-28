@@ -10,25 +10,24 @@
 <body>
 <div id="fadeover_1">Hey!</div><!-- This is the actual container of the widget -->
 <style type="text/css">
-	#fadeover_1 .ui-widget-fadeover-over {
+	#fadeover_1 .ui-widget-fadeover-container-div { 
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
 		background-color: white;
-		color: red;
 		border: 1px solid black;
+	}
+	#fadeover_1 .ui-widget-fadeover-over {
+		color: red;
 	}
 	#fadeover_1 .ui-widget-fadeover-normal { 
-		background-color: white;
 		color: green;
-		border: 1px solid black;
 	}
 	#fadeover_1 .ui-widget-fadeover-active { 
-		background-color: white;
 		color: blue;
-		border: 1px solid black;
 	}
 	#fadeover_1 .ui-widget-fadeover-disabled { 
-		background-color: white;
 		color: gray;
-		border: 1px solid black;
 	}
 </style>
 <script>

@@ -253,6 +253,7 @@ $.widget( "ui.fadeover", {
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget-fadeover-disabled')
+					.addClass('ui-widget-fadeover-container-div')
 					.appendTo(this.element);
 		this.activediv=$('<div></div>')
 					.css({
@@ -264,6 +265,7 @@ $.widget( "ui.fadeover", {
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget-fadeover-active')
+					.addClass('ui-widget-fadeover-container-div')
 					.appendTo(this.element);
 		this.overdiv=$('<div></div>')
 					.css({
@@ -275,6 +277,7 @@ $.widget( "ui.fadeover", {
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget-fadeover-over')
+					.addClass('ui-widget-fadeover-container-div')
 					.appendTo(this.element);
 		this.hotspot=$('<div></div>')
 					.css({
@@ -285,6 +288,7 @@ $.widget( "ui.fadeover", {
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget-fadeover-hotspot')
+					.addClass('ui-widget-fadeover-container-div')
 					.appendTo(this.element);
 		this.normaldiv=$('<div></div>')
 					.css({
@@ -295,6 +299,7 @@ $.widget( "ui.fadeover", {
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget-fadeover-normal')
+					.addClass('ui-widget-fadeover-container-div')
 					.appendTo(this.element);
 		if (this.is_image()) { 
 			this._setup_content_image();
