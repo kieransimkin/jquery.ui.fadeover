@@ -379,13 +379,13 @@ $.widget( "ui.fadeover", {
 		this._loaded();
 	},
 	_setup_content_ui_button: function() { 
-		this.normal_html = $('<button></button>')
+		this.normal_html = $('<div></div>')
 					.appendTo(this.normaldiv);
-		this.over_html = $('<button></button>')
+		this.over_html = $('<div></div>')
 					.appendTo(this.overdiv);
-		this.disabled_html = $('<button></button>')
+		this.disabled_html = $('<div></div>')
 					.appendTo(this.disableddiv);
-		this.active_html = $('<button></button>')
+		this.active_html = $('<div></div>')
 					.appendTo(this.activediv);
 		this._create_ui_button_html(this.normal_html,'normal');
 		this._create_ui_button_html(this.over_html,'over');
@@ -521,7 +521,6 @@ $.widget( "ui.fadeover", {
 	_set_size_from_sizer_div: function() {
 		this.options.width=this.sizerdiv.width();
 		this.options.height=this.sizerdiv.height();
-		return;
 		this.sizerdiv.remove();
 		this.element.css({opacity: '0.0'});
 		var me = this;
