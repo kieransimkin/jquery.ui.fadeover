@@ -36,6 +36,8 @@ $.widget( "ui.fadeover", {
 		active_up_duration: 600,
 		autosize_slide_animate_duration: 200,
 		autosize_fade_animate_duration: 600,
+		disable_duration: 600,
+		enable_duration: 600,
 		images: {
 			normal: null,
 			over: null,
@@ -132,7 +134,7 @@ $.widget( "ui.fadeover", {
 				me.current_disabled_effect.stop();
 				me.current_disabled_effect=null;
 			}
-			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0, duration: me.options.disabled_down_duration, complete: function() { 
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0, duration: me.options.disable_duration, complete: function() { 
 					me.current_disabled_effect=null;
 			}});
 		}
@@ -144,7 +146,7 @@ $.widget( "ui.fadeover", {
 				me.current_disabled_effect.stop();
 				me.current_disabled_effect=null;
 			}
-			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0, duration: me.options.disabled_up_duration, complete: function() { 
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0, duration: me.options.enable_duration, complete: function() { 
 				me.current_disabled_effect=null;
 			}});
 		}
