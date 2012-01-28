@@ -125,6 +125,30 @@ $.widget( "ui.fadeover", {
 			}});
 		}
 	},
+	_set_disabled: function() { 
+		var me = this;
+		return function(event) { 
+			if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
+				me.current_disabled_effect.stop();
+				me.current_disabled_effect=null;
+			}
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0, duration: me.options.disabled_down_duration, complete: function() { 
+					me.current_disabled_effect=null;
+			}});
+		}
+	},
+	_unset_disabled: function() { 
+		var me = this;
+		return function(event) { 
+			if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
+				me.current_disabled_effect.stop();
+				me.current_disabled_effect=null;
+			}
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0, duration: me.options.disabled_up_duration, complete: function() { 
+				me.current_disabled_effect=null;
+			}});
+		}
+	},
 	_mouseenter: function() { 
 		var me = this;
 		return function(event) { 
@@ -525,7 +549,11 @@ $.widget( "ui.fadeover", {
 		switch( key ) {
 			case "disabled":
 				if (this.has_disabled()) { 
-					console.log(value);
+					if (value) {
+						this._set_disabled();
+					} else { 
+						this._unset_disabled();
+					}
 				}
 				// handle enabling and disabling	
 				break;
