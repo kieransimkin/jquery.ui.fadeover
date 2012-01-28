@@ -624,7 +624,7 @@ $.widget( "ui.fadeover", {
 	_destroy: function() {
 		this._unbind_events();
 		this.element.html(this.orightml);
-		this.removeClass('ui-widget-fadeover').removeAttr('role').removeAttr('aria-pressed');
+		this.element.removeClass('ui-widget-fadeover').removeAttr('role').removeAttr('aria-pressed');
 
 	},
 	refresh: function() {
