@@ -61,7 +61,9 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	_create: function() { 
-		this.orightml=this.element.html();
+		if (typeof(this.orightml)=='undefined') { 
+			this.orightml=this.element.html();
+		}
 		if (this.options.title===null) { 
 			this.options.title = this.options.alt;
 		}
@@ -525,7 +527,6 @@ $.widget( "ui.fadeover", {
 		this.element.css({opacity: '0.0'});
 		var me = this;
 		this.element.animate({width: this.options.width+'px', height: this.options.height+'px'},{duration: this.options.autosize_slide_animate_duration, complete: function() { 
-			me._destroy();
 			me._create();
 			me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
 		}});
