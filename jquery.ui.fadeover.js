@@ -233,6 +233,8 @@ $.widget( "ui.fadeover", {
 						display: 'block',
 						position: 'relative'
 					})
+					.width(this.options.width)
+					.height(this.options.height)
 					.addClass('ui-widget-fadeover');
 		if (this.options.clickable && !this.options.disabled) { 
 			this.element.css({cursor: 'pointer'});
