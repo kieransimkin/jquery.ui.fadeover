@@ -11,8 +11,6 @@
 <div id="fadeover_1">Hey!</div><!-- This is the actual container of the widget -->
 <style type="text/css">
 	#fadeover_1 .ui-widget-fadeover-container-div { 
-		width: 150px;
-		height: 57px;
 		background-image: url('empty_button_normal.png');
 		text-align: center;
 	}
@@ -30,7 +28,7 @@
 	}
 </style>
 <script>
-	$('#fadeover_1').fadeover();
+	$('#fadeover_1').fadeover({width: 150, height: 57});
 </script>
 <br style="clear: both;" />
 <a href="#" onclick="$('#fadeover_1').fadeover('disable'); return false;">Disable Control</a> - <a href="#" onclick="$('#fadeover_1').fadeover('enable'); return false;">Enable Control</a>
