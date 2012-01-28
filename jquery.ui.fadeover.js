@@ -520,6 +520,9 @@ $.widget( "ui.fadeover", {
 	_setOption: function(key, value) { 
 		switch( key ) {
 			case "disabled":
+				if (this.has_disabled()) { 
+					console.log(value);
+				}
 				// handle enabling and disabling	
 				break;
 		}
