@@ -525,6 +525,7 @@ $.widget( "ui.fadeover", {
 		this.element.css({opacity: '0.0'});
 		var me = this;
 		this.element.animate({width: this.options.width+'px', height: this.options.height+'px'},{duration: this.options.autosize_slide_animate_duration, complete: function() { 
+			me._destroy();
 			me._create();
 			me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
 		}});
