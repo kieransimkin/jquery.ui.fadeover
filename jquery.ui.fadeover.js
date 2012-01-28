@@ -628,6 +628,8 @@ $.widget( "ui.fadeover", {
 
 	},
 	refresh: function() {
+		console.log('got here');
+		return;
 		this._destroy();
 		this._create();
 	},
