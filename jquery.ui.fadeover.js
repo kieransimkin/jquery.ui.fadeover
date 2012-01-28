@@ -61,9 +61,7 @@ $.widget( "ui.fadeover", {
 		}
 	},
 	_create: function() { 
-		if (typeof(this.orightml)=='undefined') { 
-			this.orightml=this.element.html();
-		}
+		this.orightml=this.element.html();
 		if (this.options.title===null) { 
 			this.options.title = this.options.alt;
 		}
@@ -80,6 +78,7 @@ $.widget( "ui.fadeover", {
 			return;
 		} else if (this.is_css() && (this.options.width === null || this.options.height === null)) { 
 			this._determine_css_dimensions();
+			return;
 		}
 		if (parseInt(this.options.width) != this.options.width || parseInt(this.options.height) != this.options.height) { 
 			alert('FadeOver width and height must be numeric');
