@@ -288,7 +288,6 @@ $.widget( "ui.fadeover", {
 					.width(this.options.width)
 					.height(this.options.height)
 					.addClass('ui-widget-fadeover-hotspot')
-					.addClass('ui-widget-fadeover-container-div')
 					.appendTo(this.element);
 		this.normaldiv=$('<div></div>')
 					.css({
