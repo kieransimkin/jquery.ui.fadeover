@@ -492,17 +492,17 @@ $.widget( "ui.fadeover", {
 	},
 	_determine_html_dimensions: function() {
 		this._create_sizer_div();
-		this.sizerdiv.html(this.options.html_fragments.normal);
+		this.sizercontainerdiv.html(this.options.html_fragments.normal);
 		this._set_size_from_sizer_div();
 	},
 	_determine_button_dimensions: function() { 
 		this._create_sizer_div();
-		this._create_ui_button_html(this.sizerdiv,'normal');
+		this._create_ui_button_html(this.sizercontainerdiv,'normal');
 		this._set_size_from_sizer_div();
 	},
 	_determine_css_dimensions: function() { 
 		this._create_sizer_div();
-		this.sizerdiv.html(this.orightml);
+		this.sizercontainerdiv.html(this.orightml);
 		this._set_size_from_sizer_div();
 	},
 	_set_size_from_sizer_div: function() {
@@ -524,6 +524,9 @@ $.widget( "ui.fadeover", {
 						visibility: 'hidden'
 					})
 					.appendTo(this.element);
+		this.sizercontainerdiv=$('<div></div>')
+					.addClass('ui-widget-fadeover-normal')
+					.appendTo(this.sizerdiv);
 	},
 	has_active: function() { 
 		if (this.is_image() && this.options.images.active!==null) { 
