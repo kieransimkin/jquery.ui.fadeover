@@ -9,7 +9,7 @@
 </head>
 <body>
 <style type="text/css">
-	.fadeover .ui-widget-fadeover-container-div { 
+	.menu_button .ui-widget-fadeover-container-div { 
 		background-image: url('empty_button_normal.png');
 		background-repeat: no-repeat;
 		padding-top: 18px;
@@ -20,27 +20,27 @@
 		font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
 		font-weight: bold;
 	}
-	.fadeover .ui-widget-fadeover-over {
+	.menubutton .ui-widget-fadeover-over {
 		background-image: url('empty_button_over.png');
 	}
-	.fadeover .ui-widget-fadeover-active { 
+	.menubutton .ui-widget-fadeover-active { 
 		background-image: url('empty_button_active.png');
 	}
-	.fadeover .ui-widget-fadeover-disabled { 
+	.menubutton .ui-widget-fadeover-disabled { 
 		background-image: url('empty_button_disabled.png');
 	}
 </style>
-<div id="fadeover_1" class="fadeover">Button 1</div><!-- This is the actual container of the widget -->
-<div id="fadeover_2" class="fadeover">Button 2</div><!-- This is the actual container of the widget -->
-<div id="fadeover_3" class="fadeover">Button 3</div><!-- This is the actual container of the widget -->
-<div id="fadeover_4" class="fadeover">Button 4</div><!-- This is the actual container of the widget -->
-<div id="fadeover_5" class="fadeover">Button 5</div><!-- This is the actual container of the widget -->
-<div id="fadeover_6" class="fadeover">Button 6</div><!-- This is the actual container of the widget -->
+<div class="menubutton">Button 1</div><!-- This is the actual container of the widget -->
+<div class="menubutton">Button 2</div><!-- This is the actual container of the widget -->
+<div class="menubutton">Button 3</div><!-- This is the actual container of the widget -->
+<div class="menubutton">Button 4</div><!-- This is the actual container of the widget -->
+<div class="menubutton">Button 5</div><!-- This is the actual container of the widget -->
+<div class="menubutton">Button 6</div><!-- This is the actual container of the widget -->
 <script>
-	$('.fadeover').fadeover({width: 150, height: 57});
+	$('.menubutton').fadeover({width: 150, height: 57});
 </script>
 <br style="clear: both;" />
-<a href="#" onclick="$('.fadeover').fadeover('disable'); return false;">Disable Controls</a> - <a href="#" onclick="$('.fadeover').fadeover('enable'); return false;">Enable Controls</a>
+<a href="#" onclick="$('.menubutton').fadeover('disable'); return false;">Disable Controls</a> - <a href="#" onclick="$('.menubutton').fadeover('enable'); return false;">Enable Controls</a>
 <br style="clear: both;" />
 &nbsp;
 <br style="clear: both;" />
