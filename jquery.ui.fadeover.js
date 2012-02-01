@@ -20,7 +20,7 @@ EN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 var        baseClasses = "ui-button ui-widget ui-state-default ui-corner-all";
 var        otherClasses = "ui-state-hover ui-state-active ui-button-icons-only ui-button-icon-only ui-button-text-icons ui-button-text-icon ui-button-text-only";
 
-$.widget( "ui.fadeover", {
+$.widget( "slinq.fadeover", {
         // These options will be used as defaults
         options: {
 		width: null,
