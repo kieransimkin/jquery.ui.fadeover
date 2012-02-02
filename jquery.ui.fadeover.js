@@ -109,15 +109,18 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return false;
 			}
+			me._trigger('downstart',event);
 			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
 				me.current_active_effect.stop();
 				me.current_active_effect=null;
 			}
 			if (me.options.active_down_duration===false) { 
 				me.activediv.css({opacity: 1.0});
+				me._trigger('downend',event);
 			} else {
 				me.current_active_effect=me.activediv.animate({opacity: 1.0}, {duration: me.options.active_down_duration, complete: function() { 
 					me.current_active_effect=null;
+					me._trigger('downend',event);
 				}});
 			}
 		}
@@ -128,17 +131,25 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return false;
 			}
+			me._trigger('upstart',event);
 			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
 				me.current_active_effect.stop();
 				me.current_active_effect=null;
 			}
-			me.current_active_effect=me.activediv.animate({opacity: 0.0}, {duration: me.options.active_up_duration, complete: function() { 
-				me.current_active_effect=null;
-			}});
+			if (me.options.active_up_duration===false) { 
+				me.activediv.css({opacity: 0.0});
+				me._trigger('upend',event);
+			} else { 
+				me.current_active_effect=me.activediv.animate({opacity: 0.0}, {duration: me.options.active_up_duration, complete: function() { 
+					me.current_active_effect=null;
+					me._trigger('upend',event);
+				}});
+			}
 		}
 	},
 	_set_disabled: function(callback) { 
 		var me = this;
+		me._trigger('disablestart');
 		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
 			me.current_disabled_effect.stop();
 			me.current_disabled_effect=null;
@@ -147,17 +158,28 @@ $.widget( "slinq.fadeover", {
 			me.current_normal_disabled_effect.stop();
 			me.current_normal_disabled_effect=null;
 		}
-		me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0}, {duration: me.options.disable_duration, complete: function() { 
+		if (me.options.disable_duration === false) { 
+			me.disableddiv.css({opacity: 1.0});
 			me.element.css({cursor: 'default'});
 			if (typeof(callback)=='function') { 
 				callback();
 			}
-			me.current_disabled_effect=null;
-		}});
+			me._trigger('disableend');
+		} else { 
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0}, {duration: me.options.disable_duration, complete: function() { 
+				me.element.css({cursor: 'default'});
+				if (typeof(callback)=='function') { 
+					callback();
+				}
+				me.current_disabled_effect=null;
+				me._trigger('disableend');
+			}});
+		}
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 0.0}, {duration: me.options.disable_duration});
 	},
 	_unset_disabled: function() { 
 		var me = this;
+		me._trigger('enablestart');
 		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
 			me.current_disabled_effect.stop();
 			me.current_disabled_effect=null;
@@ -166,10 +188,17 @@ $.widget( "slinq.fadeover", {
 			me.current_normal_disabled_effect.stop();
 			me.current_normal_disabled_effect=null;
 		}
-		me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0}, {duration: me.options.enable_duration, complete: function() { 
-			me.current_disabled_effect=null;
+		if (me.options.enable_duration === false) { 
+			me.disableddiv.css({opacity: 0.0});
 			me.element.css({cursor: 'pointer'});
-		}});
+			me._trigger('enableend');
+		} else { 
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0}, {duration: me.options.enable_duration, complete: function() { 
+				me.current_disabled_effect=null;
+				me.element.css({cursor: 'pointer'});
+				me._trigger('enableend');
+			}});
+		}
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 1.0}, {duration: me.options.disable_duration});
 	},
 	_mouseenter: function() { 
@@ -178,13 +207,20 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return;
 			}
+			me._trigger('overstart',event);
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
 				me.current_effect.stop();
 				me.current_effect=null;
 			}
-			me.current_effect=me.overdiv.animate({opacity: 1.0}, {duration: me.options.over_duration, complete: function() { 
-				me.current_effect=null;
-			}});
+			if (me.options.over_duration === false) { 
+				me.overdiv.css({opacity: 1.0});
+				me._trigger('overend',event);
+			} else { 
+				me.current_effect=me.overdiv.animate({opacity: 1.0}, {duration: me.options.over_duration, complete: function() { 
+					me.current_effect=null;
+					me._trigger('overend',event);
+				}});
+			}
 		}
 	},
 	_mouseleave: function() { 
@@ -193,13 +229,20 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return;
 			}
+			me._trigger('outstart');
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
 				me.current_effect.stop();
 				me.current_effect=null;
 			}
-			me.current_effect=me.overdiv.animate({opacity: 0.0}, {duration: me.options.out_duration, complete: function() { 
-				me.current_effect=null;
-			}});
+			if (me.options.out_duration === false) { 
+				me.overdiv.css({opacity: 0.0});
+				me._trigger('outend',event);
+			} else { 
+				me.current_effect=me.overdiv.animate({opacity: 0.0}, {duration: me.options.out_duration, complete: function() { 
+					me.current_effect=null;
+					me._trigger('outend',event);
+				}});
+			}
 		}
 	},
 	_mouseclick: function() { 
@@ -490,6 +533,7 @@ $.widget( "slinq.fadeover", {
 		}
 	},
 	_determine_image_dimensions: function() { 
+		this._trigger('autosizestart');
 		var normal = new Image();
 		var me = this;
 		$(normal).bind("load", function() { 
@@ -498,7 +542,9 @@ $.widget( "slinq.fadeover", {
 			me.element.css({opacity: '0.0'});
 			me.element.animate({width: this.width+'px', height: this.height+'px'},{duration: me.options.autosize_slide_animate_duration, complete: function() { 
 				me._create();
-				me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
+				me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration, complete: function() { 
+					me._trigger('autosizeend');	
+				}});
 			}});
 		});
 		normal.src = this.options.images.normal;
@@ -519,6 +565,7 @@ $.widget( "slinq.fadeover", {
 		this._set_size_from_sizer_div();
 	},
 	_set_size_from_sizer_div: function() {
+		this._trigger('autosizestart');
 		this.options.width=this.sizerdiv.width()+1;
 		this.options.height=this.sizerdiv.height()+1;
 		if (this.is_button()) { 
@@ -531,7 +578,9 @@ $.widget( "slinq.fadeover", {
 		var me = this;
 		this.element.animate({width: this.options.width+'px', height: this.options.height+'px'},{duration: this.options.autosize_slide_animate_duration, complete: function() { 
 			me._create();
-			me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration});
+			me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration, complete: function() { 
+				me._trigger('autosizeend');	
+			}});
 		}});
 	},
 	_create_sizer_div: function() { 
