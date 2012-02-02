@@ -34,10 +34,10 @@ $.widget( "slinq.fadeover", {
 		out_duration: 600,
 		active_down_duration: false,
 		active_up_duration: 600,
-		autosize_slide_animate_duration: 200,
-		autosize_fade_animate_duration: 600,
 		disable_duration: 600,
 		enable_duration: 600,
+		autosize_slide_animate_duration: 200,
+		autosize_fade_animate_duration: 600,
 		images: {
 			normal: null,
 			over: null,
