@@ -1,3 +1,4 @@
  * It'd be nice to be able to use Faceover as a drop-in replacement for the standard UI button widget. This would probably be fairly easy - a wrapper function.
  * It'd also be nice to be able to use FadeOver in place of the :hover CSS on all the standard UI widgets
  * Destroy and refresh are implemented, but don't work perfectly. In particular, destroy leaves inline styles on the element
+ * Support no animations during autosizing
