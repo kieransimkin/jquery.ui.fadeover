@@ -109,18 +109,18 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return false;
 			}
-			me._trigger('downstart',event);
+			me._trigger('startdown',event);
 			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
 				me.current_active_effect.stop();
 				me.current_active_effect=null;
 			}
 			if (me.options.active_down_duration===false) { 
 				me.activediv.css({opacity: 1.0});
-				me._trigger('downend',event);
+				me._trigger('enddown',event);
 			} else {
 				me.current_active_effect=me.activediv.animate({opacity: 1.0}, {duration: me.options.active_down_duration, complete: function() { 
 					me.current_active_effect=null;
-					me._trigger('downend',event);
+					me._trigger('enddown',event);
 				}});
 			}
 		}
@@ -131,25 +131,25 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return false;
 			}
-			me._trigger('upstart',event);
+			me._trigger('startup',event);
 			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
 				me.current_active_effect.stop();
 				me.current_active_effect=null;
 			}
 			if (me.options.active_up_duration===false) { 
 				me.activediv.css({opacity: 0.0});
-				me._trigger('upend',event);
+				me._trigger('endup',event);
 			} else { 
 				me.current_active_effect=me.activediv.animate({opacity: 0.0}, {duration: me.options.active_up_duration, complete: function() { 
 					me.current_active_effect=null;
-					me._trigger('upend',event);
+					me._trigger('endup',event);
 				}});
 			}
 		}
 	},
 	_set_disabled: function(callback) { 
 		var me = this;
-		me._trigger('disablestart');
+		me._trigger('startdisable');
 		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
 			me.current_disabled_effect.stop();
 			me.current_disabled_effect=null;
@@ -164,7 +164,7 @@ $.widget( "slinq.fadeover", {
 			if (typeof(callback)=='function') { 
 				callback();
 			}
-			me._trigger('disableend');
+			me._trigger('enddisable');
 		} else { 
 			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0}, {duration: me.options.disable_duration, complete: function() { 
 				me.element.css({cursor: 'default'});
@@ -172,14 +172,14 @@ $.widget( "slinq.fadeover", {
 					callback();
 				}
 				me.current_disabled_effect=null;
-				me._trigger('disableend');
+				me._trigger('enddisable');
 			}});
 		}
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 0.0}, {duration: me.options.disable_duration});
 	},
 	_unset_disabled: function() { 
 		var me = this;
-		me._trigger('enablestart');
+		me._trigger('startenable');
 		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
 			me.current_disabled_effect.stop();
 			me.current_disabled_effect=null;
@@ -191,12 +191,12 @@ $.widget( "slinq.fadeover", {
 		if (me.options.enable_duration === false) { 
 			me.disableddiv.css({opacity: 0.0});
 			me.element.css({cursor: 'pointer'});
-			me._trigger('enableend');
+			me._trigger('endenable');
 		} else { 
 			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0}, {duration: me.options.enable_duration, complete: function() { 
 				me.current_disabled_effect=null;
 				me.element.css({cursor: 'pointer'});
-				me._trigger('enableend');
+				me._trigger('endenable');
 			}});
 		}
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 1.0}, {duration: me.options.disable_duration});
@@ -207,18 +207,18 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return;
 			}
-			me._trigger('overstart',event);
+			me._trigger('startover',event);
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
 				me.current_effect.stop();
 				me.current_effect=null;
 			}
 			if (me.options.over_duration === false) { 
 				me.overdiv.css({opacity: 1.0});
-				me._trigger('overend',event);
+				me._trigger('endover',event);
 			} else { 
 				me.current_effect=me.overdiv.animate({opacity: 1.0}, {duration: me.options.over_duration, complete: function() { 
 					me.current_effect=null;
-					me._trigger('overend',event);
+					me._trigger('endover',event);
 				}});
 			}
 		}
@@ -229,18 +229,18 @@ $.widget( "slinq.fadeover", {
 			if (me.options.disabled) { 
 				return;
 			}
-			me._trigger('outstart');
+			me._trigger('startout');
 			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
 				me.current_effect.stop();
 				me.current_effect=null;
 			}
 			if (me.options.out_duration === false) { 
 				me.overdiv.css({opacity: 0.0});
-				me._trigger('outend',event);
+				me._trigger('endout',event);
 			} else { 
 				me.current_effect=me.overdiv.animate({opacity: 0.0}, {duration: me.options.out_duration, complete: function() { 
 					me.current_effect=null;
-					me._trigger('outend',event);
+					me._trigger('endout',event);
 				}});
 			}
 		}
@@ -533,7 +533,7 @@ $.widget( "slinq.fadeover", {
 		}
 	},
 	_determine_image_dimensions: function() { 
-		this._trigger('autosizestart');
+		this._trigger('startautosize');
 		var normal = new Image();
 		var me = this;
 		$(normal).bind("load", function() { 
@@ -543,7 +543,7 @@ $.widget( "slinq.fadeover", {
 			me.element.animate({width: this.width+'px', height: this.height+'px'},{duration: me.options.autosize_slide_animate_duration, complete: function() { 
 				me._create();
 				me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration, complete: function() { 
-					me._trigger('autosizeend');	
+					me._trigger('endautosize');	
 				}});
 			}});
 		});
@@ -565,7 +565,7 @@ $.widget( "slinq.fadeover", {
 		this._set_size_from_sizer_div();
 	},
 	_set_size_from_sizer_div: function() {
-		this._trigger('autosizestart');
+		this._trigger('startautosize');
 		this.options.width=this.sizerdiv.width()+1;
 		this.options.height=this.sizerdiv.height()+1;
 		if (this.is_button()) { 
@@ -579,7 +579,7 @@ $.widget( "slinq.fadeover", {
 		this.element.animate({width: this.options.width+'px', height: this.options.height+'px'},{duration: this.options.autosize_slide_animate_duration, complete: function() { 
 			me._create();
 			me.element.animate({opacity: '1.0'},{duration: me.options.autosize_fade_animate_duration, complete: function() { 
-				me._trigger('autosizeend');	
+				me._trigger('endautosize');	
 			}});
 		}});
 	},
