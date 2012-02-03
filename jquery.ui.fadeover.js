@@ -400,6 +400,7 @@ $.widget( "slinq.fadeover", {
 				me._trigger('enddown',event);
 			} else {
 				me.current_active_effect=me.activediv.animate({opacity: 1.0}, {duration: me.options.active_down_duration, complete: function() { 
+					me.current_active=true;
 					me.current_active_effect=null;
 					me._trigger('enddown',event);
 				}});
@@ -422,6 +423,7 @@ $.widget( "slinq.fadeover", {
 				me._trigger('endup',event);
 			} else { 
 				me.current_active_effect=me.activediv.animate({opacity: 0.0}, {duration: me.options.active_up_duration, complete: function() { 
+					me.current_active=false;
 					me.current_active_effect=null;
 					me._trigger('endup',event);
 				}});
@@ -438,6 +440,14 @@ $.widget( "slinq.fadeover", {
 		if (typeof(me.current_normal_disabled_effect)!='undefined' && me.current_normal_disabled_effect!==null) { 
 			me.current_normal_disabled_effect.stop();
 			me.current_normal_disabled_effect=null;
+		}
+		if (typeof(me.current_over_disabled_effect)!='undefined' && me.current_over_disabled_effect!==null) { 
+			me.current_over_disabled_effect.stop();
+			me.current_over_disabled_effect=null;
+		}
+		if (typeof(me.current_active_disabled_effect)!='undefined' && me.current_active_disabled_effect!==null) { 
+			me.current_active_disabled_effect.stop();
+			me.current_active_disabled_effect=null;
 		}
 		if (me.options.disable_duration === false) { 
 			me.disableddiv.css({opacity: 1.0});
@@ -457,6 +467,12 @@ $.widget( "slinq.fadeover", {
 			}});
 		}
 		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 0.0}, {duration: me.options.disable_duration});
+		if (me.current_over===true || me.current_effect!==null) { 
+			me.current_over_disabled_effect=me.overdiv.animate({opacity: 0.0}, {duration: me.options.disable_duration});
+		}
+		if (me.current_active===true || me.current_active_effect!==null) { 
+			me.current_active_disabled_effect=me.activediv.animate({opacity: 0.0}, {duration: me.options.disable_duration});
+		}
 	},
 	_unset_disabled: function() { 
 		var me = this;
@@ -498,6 +514,7 @@ $.widget( "slinq.fadeover", {
 				me._trigger('endover',event);
 			} else { 
 				me.current_effect=me.overdiv.animate({opacity: 1.0}, {duration: me.options.over_duration, complete: function() { 
+					me.current_over=true;
 					me.current_effect=null;
 					me._trigger('endover',event);
 				}});
@@ -520,6 +537,7 @@ $.widget( "slinq.fadeover", {
 				me._trigger('endout',event);
 			} else { 
 				me.current_effect=me.overdiv.animate({opacity: 0.0}, {duration: me.options.out_duration, complete: function() { 
+					me.current_over=false;
 					me.current_effect=null;
 					me._trigger('endout',event);
 				}});
