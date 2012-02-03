@@ -9,16 +9,10 @@
  *
  *  -  Redistributions of this code must retain the above copyright notice, this condition and the following disclaimer.
  *
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISC
-LAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
- OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EV
-EN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
 (function( $ ) {
-
-var        baseClasses = "ui-button ui-widget ui-state-default ui-corner-all";
-var        otherClasses = "ui-state-hover ui-state-active ui-button-icons-only ui-button-icon-only ui-button-text-icons ui-button-text-icon ui-button-text-only";
 
 $.widget( "slinq.fadeover", {
         // These options will be used as defaults
@@ -60,217 +54,84 @@ $.widget( "slinq.fadeover", {
 			}
 		}
 	},
-	_create: function() { 
-		this.orightml=this.element.html();
-		if (this.options.title===null) { 
-			this.options.title = this.options.alt;
-		}
-		var preload_loader = new Image();
-		preload_loader.src = this.options.loading_img;
-		if (this.is_image() && (this.options.width === null || this.options.height === null)) { 
-			this._determine_image_dimensions();
-			return;
-		} else if (this.is_button() && (this.options.width === null || this.options.height ===null)) { 
-			this._determine_button_dimensions();
-			return;
-		} else if (this.is_html() && (this.options.width === null || this.options.height === null)) { 
-			this._determine_html_dimensions();
-			return;
-		} else if (this.is_css() && (this.options.width === null || this.options.height === null)) { 
-			this._determine_css_dimensions();
-			return;
-		}
-		if (parseInt(this.options.width) != this.options.width || parseInt(this.options.height) != this.options.height) { 
-			alert('FadeOver width and height must be numeric');
-			return;
-		}
-		this.options.width=parseInt(this.options.width);
-		this.options.height=parseInt(this.options.height);
-		this._do_html_setup();
-		this._bind_events();
-	},
-	_bind_events: function() { 
-		this.element.bind('mouseenter.'+this.widgetName, this._mouseenter());
-		this.element.bind('mouseleave.'+this.widgetName, this._mouseleave());
-		this.element.bind('mousedown.'+this.widgetName, this._mousedown());
-		this.element.bind('mouseup.'+this.widgetName, this._mouseup());
-		this.element.bind('click.'+this.widgetName, this._mouseclick());
-	},
-	_unbind_events: function() {
-		this.element.unbind('mouseenter.'+this.widgetName, this._mouseenter());
-		this.element.unbind('mouseleave.'+this.widgetName, this._mouseleave());
-		this.element.unbind('mousedown.'+this.widgetName, this._mousedown());
-		this.element.unbind('mouseup.'+this.widgetName, this._mouseup());
-		this.element.unbind('click.'+this.widgetName, this._mouseclick());
-	},
-	_mousedown: function() { 
-		var me = this;
-		return function(event) { 
-			if (me.options.disabled) { 
-				return false;
-			}
-			me._trigger('startdown',event);
-			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
-				me.current_active_effect.stop();
-				me.current_active_effect=null;
-			}
-			if (me.options.active_down_duration===false) { 
-				me.activediv.css({opacity: 1.0});
-				me._trigger('enddown',event);
-			} else {
-				me.current_active_effect=me.activediv.animate({opacity: 1.0}, {duration: me.options.active_down_duration, complete: function() { 
-					me.current_active_effect=null;
-					me._trigger('enddown',event);
-				}});
-			}
-		}
-	},
-	_mouseup: function() { 
-		var me = this;
-		return function(event) { 
-			if (me.options.disabled) { 
-				return false;
-			}
-			me._trigger('startup',event);
-			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
-				me.current_active_effect.stop();
-				me.current_active_effect=null;
-			}
-			if (me.options.active_up_duration===false) { 
-				me.activediv.css({opacity: 0.0});
-				me._trigger('endup',event);
-			} else { 
-				me.current_active_effect=me.activediv.animate({opacity: 0.0}, {duration: me.options.active_up_duration, complete: function() { 
-					me.current_active_effect=null;
-					me._trigger('endup',event);
-				}});
-			}
-		}
-	},
-	_set_disabled: function(callback) { 
-		var me = this;
-		me._trigger('startdisable');
-		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
-			me.current_disabled_effect.stop();
-			me.current_disabled_effect=null;
-		}
-		if (typeof(me.current_normal_disabled_effect)!='undefined' && me.current_normal_disabled_effect!==null) { 
-			me.current_normal_disabled_effect.stop();
-			me.current_normal_disabled_effect=null;
-		}
-		if (me.options.disable_duration === false) { 
-			me.disableddiv.css({opacity: 1.0});
-			me.element.css({cursor: 'default'});
-			if (typeof(callback)=='function') { 
-				callback();
-			}
-			me._trigger('enddisable');
+	has_active: function() { 
+		if (this.is_image() && this.options.images.active!==null) { 
+			return true;
+		} else if (this.is_html() && this.options.html_fragments.active!==null) {
+			return true;	
+		} else if (this.is_button()) { 
+			return true;
+		} else if (this.is_css()) {
+			return true;
 		} else { 
-			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0}, {duration: me.options.disable_duration, complete: function() { 
-				me.element.css({cursor: 'default'});
-				if (typeof(callback)=='function') { 
-					callback();
-				}
-				me.current_disabled_effect=null;
-				me._trigger('enddisable');
-			}});
+			return false;
 		}
-		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 0.0}, {duration: me.options.disable_duration});
 	},
-	_unset_disabled: function() { 
-		var me = this;
-		me._trigger('startenable');
-		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
-			me.current_disabled_effect.stop();
-			me.current_disabled_effect=null;
-		}
-		if (typeof(me.current_normal_disabled_effect)!='undefined' && me.current_normal_disabled_effect!==null) { 
-			me.current_normal_disabled_effect.stop();
-			me.current_normal_disabled_effect=null;
-		}
-		if (me.options.enable_duration === false) { 
-			me.disableddiv.css({opacity: 0.0});
-			me.element.css({cursor: 'pointer'});
-			me._trigger('endenable');
+	has_disabled: function() { 
+		if (this.is_image() && this.options.images.disabled!==null) { 
+			return true;
+		} else if (this.is_html() && this.options.html_fragments.disabled!==null) { 
+			return true;
+		} else if (this.is_button()) { 
+			return true;
+		} else if (this.is_css()) { 
+			return true;
 		} else { 
-			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0}, {duration: me.options.enable_duration, complete: function() { 
-				me.current_disabled_effect=null;
-				me.element.css({cursor: 'pointer'});
-				me._trigger('endenable');
-			}});
-		}
-		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 1.0}, {duration: me.options.disable_duration});
-	},
-	_mouseenter: function() { 
-		var me = this;
-		return function(event) { 
-			if (me.options.disabled) { 
-				return;
-			}
-			me._trigger('startover',event);
-			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
-				me.current_effect.stop();
-				me.current_effect=null;
-			}
-			if (me.options.over_duration === false) { 
-				me.overdiv.css({opacity: 1.0});
-				me._trigger('endover',event);
-			} else { 
-				me.current_effect=me.overdiv.animate({opacity: 1.0}, {duration: me.options.over_duration, complete: function() { 
-					me.current_effect=null;
-					me._trigger('endover',event);
-				}});
-			}
+			return false;
 		}
 	},
-	_mouseleave: function() { 
-		var me = this;
-		return function(event) { 
-			if (me.options.disabled) { 
-				return;
-			}
-			me._trigger('startout');
-			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
-				me.current_effect.stop();
-				me.current_effect=null;
-			}
-			if (me.options.out_duration === false) { 
-				me.overdiv.css({opacity: 0.0});
-				me._trigger('endout',event);
-			} else { 
-				me.current_effect=me.overdiv.animate({opacity: 0.0}, {duration: me.options.out_duration, complete: function() { 
-					me.current_effect=null;
-					me._trigger('endout',event);
-				}});
-			}
+	is_image: function() { 
+		if (this.options.images.normal !== null && this.options.images.over !== null) { 
+			return true;
+		} else { 
+			return false;
 		}
 	},
-	_mouseclick: function() { 
-		var me = this;
-		return function(event) {
-			if (me.options.clickable && !me.options.disabled) { 
-				return true;
-			} else {
-				// Don't bubble
-				return false;
-			}
+	is_html: function() { 
+		if (this.is_image()) { 
+			return false;
+		} else if (this.options.html_fragments.normal !== null && this.options.html_fragments.over !== null) { 
+			return true;
+		} else {
+			return false;
 		}
 	},
-	_do_loader_setup: function() { 
-		this.loaderdiv=$('<div></div>')
-					.css({
-						display: 'block',
-						position: 'absolute'
-					})
-					.width(this.options.width)
-					.height(this.options.height)
-					.addClass('ui-widget')
-					.addClass('ui-widget-fadeover-loader');
-		this.loader_image = $('<img />');
-		this.loader_image	.attr('src',this.options.loading_img)
-					.addClass('ui-widget')
-					.addClass('ui-widget-fadeover-loader-image')
-					.appendTo(this.loaderdiv);
+	is_button: function() { 
+		if (this.is_image()) { 
+			return false;
+		} else if (this.is_html()) { 
+			return false;
+		} else if (this.options.ui_button.enabled) { 
+			return true;
+		} else { 
+			return false;
+		}
+	},
+	is_css: function() { 
+		if (this.is_image()) { 
+			return false;
+		} else if (this.is_html()) { 
+			return false;
+		} else if (this.is_button()) { 
+			return false;
+		} else { 
+			return true;
+		}
+	},
+	is_anything: function() { 
+		if (this.is_image() || this.is_html() || this.is_button() || this.is_css()) { 
+			return true;
+		} else { 
+			return false;
+		}
+	},
+	refresh: function() {
+		this._destroy();
+		this._create();
+	},
+	destroy: function() { 
+		this._destroy();
+		$.Widget.prototype.destroy.call( this );	
 	},
 	_do_html_setup: function() { 
 		this.element.empty();
@@ -487,6 +348,218 @@ $.widget( "slinq.fadeover", {
 			buttonElement.addClass("ui-state-disabled");
 		}
 	},
+	_create: function() { 
+		this.orightml=this.element.html();
+		if (this.options.title===null) { 
+			this.options.title = this.options.alt;
+		}
+		var preload_loader = new Image();
+		preload_loader.src = this.options.loading_img;
+		if (this.is_image() && (this.options.width === null || this.options.height === null)) { 
+			this._determine_image_dimensions();
+			return;
+		} else if (this.is_button() && (this.options.width === null || this.options.height ===null)) { 
+			this._determine_button_dimensions();
+			return;
+		} else if (this.is_html() && (this.options.width === null || this.options.height === null)) { 
+			this._determine_html_dimensions();
+			return;
+		} else if (this.is_css() && (this.options.width === null || this.options.height === null)) { 
+			this._determine_css_dimensions();
+			return;
+		}
+		if (parseInt(this.options.width) != this.options.width || parseInt(this.options.height) != this.options.height) { 
+			alert('FadeOver width and height must be numeric');
+			return;
+		}
+		this.options.width=parseInt(this.options.width);
+		this.options.height=parseInt(this.options.height);
+		this._do_html_setup();
+		this._bind_events();
+	},
+	_bind_events: function() { 
+		this.element.bind('mouseenter.'+this.widgetName, this._mouseenter());
+		this.element.bind('mouseleave.'+this.widgetName, this._mouseleave());
+		this.element.bind('mousedown.'+this.widgetName, this._mousedown());
+		this.element.bind('mouseup.'+this.widgetName, this._mouseup());
+		this.element.bind('click.'+this.widgetName, this._mouseclick());
+	},
+	_unbind_events: function() {
+		this.element.unbind('mouseenter.'+this.widgetName, this._mouseenter());
+		this.element.unbind('mouseleave.'+this.widgetName, this._mouseleave());
+		this.element.unbind('mousedown.'+this.widgetName, this._mousedown());
+		this.element.unbind('mouseup.'+this.widgetName, this._mouseup());
+		this.element.unbind('click.'+this.widgetName, this._mouseclick());
+	},
+	_mousedown: function() { 
+		var me = this;
+		return function(event) { 
+			if (me.options.disabled) { 
+				return false;
+			}
+			me._trigger('startdown',event);
+			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
+				me.current_active_effect.stop();
+				me.current_active_effect=null;
+			}
+			if (me.options.active_down_duration===false) { 
+				me.activediv.css({opacity: 1.0});
+				me._trigger('enddown',event);
+			} else {
+				me.current_active_effect=me.activediv.animate({opacity: 1.0}, {duration: me.options.active_down_duration, complete: function() { 
+					me.current_active_effect=null;
+					me._trigger('enddown',event);
+				}});
+			}
+		}
+	},
+	_mouseup: function() { 
+		var me = this;
+		return function(event) { 
+			if (me.options.disabled) { 
+				return false;
+			}
+			me._trigger('startup',event);
+			if (typeof(me.current_active_effect)!='undefined' && me.current_active_effect!==null) { 
+				me.current_active_effect.stop();
+				me.current_active_effect=null;
+			}
+			if (me.options.active_up_duration===false) { 
+				me.activediv.css({opacity: 0.0});
+				me._trigger('endup',event);
+			} else { 
+				me.current_active_effect=me.activediv.animate({opacity: 0.0}, {duration: me.options.active_up_duration, complete: function() { 
+					me.current_active_effect=null;
+					me._trigger('endup',event);
+				}});
+			}
+		}
+	},
+	_set_disabled: function(callback) { 
+		var me = this;
+		me._trigger('startdisable');
+		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
+			me.current_disabled_effect.stop();
+			me.current_disabled_effect=null;
+		}
+		if (typeof(me.current_normal_disabled_effect)!='undefined' && me.current_normal_disabled_effect!==null) { 
+			me.current_normal_disabled_effect.stop();
+			me.current_normal_disabled_effect=null;
+		}
+		if (me.options.disable_duration === false) { 
+			me.disableddiv.css({opacity: 1.0});
+			me.element.css({cursor: 'default'});
+			if (typeof(callback)=='function') { 
+				callback();
+			}
+			me._trigger('enddisable');
+		} else { 
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 1.0}, {duration: me.options.disable_duration, complete: function() { 
+				me.element.css({cursor: 'default'});
+				if (typeof(callback)=='function') { 
+					callback();
+				}
+				me.current_disabled_effect=null;
+				me._trigger('enddisable');
+			}});
+		}
+		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 0.0}, {duration: me.options.disable_duration});
+	},
+	_unset_disabled: function() { 
+		var me = this;
+		me._trigger('startenable');
+		if (typeof(me.current_disabled_effect)!='undefined' && me.current_disabled_effect!==null) { 
+			me.current_disabled_effect.stop();
+			me.current_disabled_effect=null;
+		}
+		if (typeof(me.current_normal_disabled_effect)!='undefined' && me.current_normal_disabled_effect!==null) { 
+			me.current_normal_disabled_effect.stop();
+			me.current_normal_disabled_effect=null;
+		}
+		if (me.options.enable_duration === false) { 
+			me.disableddiv.css({opacity: 0.0});
+			me.element.css({cursor: 'pointer'});
+			me._trigger('endenable');
+		} else { 
+			me.current_disabled_effect=me.disableddiv.animate({opacity: 0.0}, {duration: me.options.enable_duration, complete: function() { 
+				me.current_disabled_effect=null;
+				me.element.css({cursor: 'pointer'});
+				me._trigger('endenable');
+			}});
+		}
+		me.current_normal_disabled_effect=me.normaldiv.animate({opacity: 1.0}, {duration: me.options.disable_duration});
+	},
+	_mouseenter: function() { 
+		var me = this;
+		return function(event) { 
+			if (me.options.disabled) { 
+				return;
+			}
+			me._trigger('startover',event);
+			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
+				me.current_effect.stop();
+				me.current_effect=null;
+			}
+			if (me.options.over_duration === false) { 
+				me.overdiv.css({opacity: 1.0});
+				me._trigger('endover',event);
+			} else { 
+				me.current_effect=me.overdiv.animate({opacity: 1.0}, {duration: me.options.over_duration, complete: function() { 
+					me.current_effect=null;
+					me._trigger('endover',event);
+				}});
+			}
+		}
+	},
+	_mouseleave: function() { 
+		var me = this;
+		return function(event) { 
+			if (me.options.disabled) { 
+				return;
+			}
+			me._trigger('startout');
+			if (typeof(me.current_effect)!='undefined' && me.current_effect!==null) { 
+				me.current_effect.stop();
+				me.current_effect=null;
+			}
+			if (me.options.out_duration === false) { 
+				me.overdiv.css({opacity: 0.0});
+				me._trigger('endout',event);
+			} else { 
+				me.current_effect=me.overdiv.animate({opacity: 0.0}, {duration: me.options.out_duration, complete: function() { 
+					me.current_effect=null;
+					me._trigger('endout',event);
+				}});
+			}
+		}
+	},
+	_mouseclick: function() { 
+		var me = this;
+		return function(event) {
+			if (me.options.clickable && !me.options.disabled) { 
+				return true;
+			} else {
+				// Don't bubble
+				return false;
+			}
+		}
+	},
+	_do_loader_setup: function() { 
+		this.loaderdiv=$('<div></div>')
+					.css({
+						display: 'block',
+						position: 'absolute'
+					})
+					.width(this.options.width)
+					.height(this.options.height)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-loader');
+		this.loader_image = $('<img />');
+		this.loader_image	.attr('src',this.options.loading_img)
+					.addClass('ui-widget')
+					.addClass('ui-widget-fadeover-loader-image')
+					.appendTo(this.loaderdiv);
+	},
 	_loaded: function() {
 		if (this.options.disabled && this.has_disabled()) { 
 			this._set_disabled(function() { 
@@ -595,77 +668,6 @@ $.widget( "slinq.fadeover", {
 					.addClass('ui-widget-fadeover-normal')
 					.appendTo(this.sizerdiv);
 	},
-	has_active: function() { 
-		if (this.is_image() && this.options.images.active!==null) { 
-			return true;
-		} else if (this.is_html() && this.options.html_fragments.active!==null) {
-			return true;	
-		} else if (this.is_button()) { 
-			return true;
-		} else if (this.is_css()) {
-			return true;
-		} else { 
-			return false;
-		}
-	},
-	has_disabled: function() { 
-		if (this.is_image() && this.options.images.disabled!==null) { 
-			return true;
-		} else if (this.is_html() && this.options.html_fragments.disabled!==null) { 
-			return true;
-		} else if (this.is_button()) { 
-			return true;
-		} else if (this.is_css()) { 
-			return true;
-		} else { 
-			return false;
-		}
-	},
-	is_image: function() { 
-		if (this.options.images.normal !== null && this.options.images.over !== null) { 
-			return true;
-		} else { 
-			return false;
-		}
-	},
-	is_html: function() { 
-		if (this.is_image()) { 
-			return false;
-		} else if (this.options.html_fragments.normal !== null && this.options.html_fragments.over !== null) { 
-			return true;
-		} else {
-			return false;
-		}
-	},
-	is_button: function() { 
-		if (this.is_image()) { 
-			return false;
-		} else if (this.is_html()) { 
-			return false;
-		} else if (this.options.ui_button.enabled) { 
-			return true;
-		} else { 
-			return false;
-		}
-	},
-	is_css: function() { 
-		if (this.is_image()) { 
-			return false;
-		} else if (this.is_html()) { 
-			return false;
-		} else if (this.is_button()) { 
-			return false;
-		} else { 
-			return true;
-		}
-	},
-	is_anything: function() { 
-		if (this.is_image() || this.is_html() || this.is_button() || this.is_css()) { 
-			return true;
-		} else { 
-			return false;
-		}
-	},
 	_setOption: function(key, value) { 
 		switch( key ) {
 			case "disabled":
@@ -688,14 +690,6 @@ $.widget( "slinq.fadeover", {
 		this.element.removeClass('ui-widget-fadeover').removeAttr('role').removeAttr('aria-pressed');
 		this.options.width=null;
 		this.options.height=null;
-	},
-	refresh: function() {
-		this._destroy();
-		this._create();
-	},
-	destroy: function() { 
-		this._destroy();
-		$.Widget.prototype.destroy.call( this );	
 	}
 });
 }(jQuery));
