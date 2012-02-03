@@ -118,13 +118,6 @@ $.widget( "slinq.fadeover", {
 			return true;
 		}
 	},
-	is_anything: function() { 
-		if (this.is_image() || this.is_html() || this.is_button() || this.is_css()) { 
-			return true;
-		} else { 
-			return false;
-		}
-	},
 	refresh: function() {
 		this._destroy();
 		this._create();

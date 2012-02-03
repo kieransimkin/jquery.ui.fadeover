@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<title>CSS Text Shadow example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.fadeover.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Chango' rel='stylesheet' type='text/css'>
+</head>
+<body bgcolor="black">
+<div id="fadeover_1">Grumpy wizards make toxic brew for the evil Queen and Jack.</div><!-- This is the actual container of the widget -->
+<style type="text/css">
+	#fadeover_1 { 
+		margin-top: 20px;
+	}
+	#fadeover_1 .ui-widget-fadeover-container-div { 
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-size: 30px;
+		font-family: 'Chango', cursive;
+	}
+	#fadeover_1 .ui-widget-fadeover-over {
+		text-shadow: 0 0 4px white, 0 -5px 4px #FFFF33, 2px -10px 6px #FFDD33, -2px -15px 11px #FF8800, 2px -25px 18px #FF2200;
+		color: white;
+	}
+	#fadeover_1 .ui-widget-fadeover-normal { 
+		text-shadow: 0 0 4px white, 0 -5px 4px #FF8800, 2px -10px 6px #FF2200;
+		color: white;
+	}
+	#fadeover_1 .ui-widget-fadeover-active { 
+		text-shadow: 0 0 4px white, 0 -5px 4px #FFFF33, 2px -10px 6px #FFDD33, -2px -15px 11px #FF8800, 2px -25px 18px #FF2200;
+		color: white;
+	}
+	#fadeover_1 .ui-widget-fadeover-disabled { 
+		color: gray;
+	}
+</style>
+<script>
+	$('#fadeover_1').fadeover({width: 500, height: 100});
+</script>
+<br style="clear: both;" />&nbsp;<br style="clear: both;" />
+<a href="#" onclick="$('#fadeover_1').fadeover('disable'); return false;">Disable Control</a> - <a href="#" onclick="$('#fadeover_1').fadeover('enable'); return false;">Enable Control</a>
+<br style="clear: both;" />
+&nbsp;
+<br style="clear: both;" />
+<a href="http://slinq.com/software/fadeover">FadeOver by Kieran Simkin</a><br />
+<a href=".">Return to examples list</a>
+</body>
+</html>
