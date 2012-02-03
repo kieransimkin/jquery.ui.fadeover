@@ -572,9 +572,10 @@ $.widget( "slinq.fadeover", {
 					.appendTo(this.loaderdiv);
 	},
 	_loaded: function() {
+		var me=this;
 		if (this.options.disabled && this.has_disabled()) { 
 			this._set_disabled(function() { 
-				this._trigger('ready');
+				me._trigger('ready');
 			});		
 		} else { 
 			this._trigger('ready');
