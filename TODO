@@ -3,3 +3,4 @@
  * Destroy and refresh are implemented, but don't work perfectly. In particular, destroy leaves inline styles on the element
  * Support no animations during autosizing
  * Autosizing doesn't always get the correct size
+ * Using an anchor tag as a fadeover results in yucky dotted borders
