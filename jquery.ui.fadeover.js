@@ -145,7 +145,8 @@ $.widget( "slinq.fadeover", {
 						display: 'block',
 						position: 'absolute',
 						opacity: '0.0',
-						'z-index': 5
+						'z-index': 5,
+						border: 'none'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -157,7 +158,8 @@ $.widget( "slinq.fadeover", {
 						display: 'block',
 						position: 'absolute',
 						opacity: '0.0',
-						'z-index': 4
+						'z-index': 4,
+						border: 'none'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -169,7 +171,8 @@ $.widget( "slinq.fadeover", {
 						display: 'block',
 						position: 'absolute',
 						opacity: '0.0',
-						'z-index':3 
+						'z-index':3,
+						border: 'none'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -180,7 +183,8 @@ $.widget( "slinq.fadeover", {
 					.css({
 						display: 'block',
 						position: 'absolute',
-						'z-index': 10
+						'z-index': 10,
+						border: 'none'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
@@ -190,7 +194,8 @@ $.widget( "slinq.fadeover", {
 					.css({
 						display: 'block',
 						position: 'relative',
-						'z-index': 1
+						'z-index': 1,
+						border: 'none'
 					})
 					.width(this.options.width)
 					.height(this.options.height)
