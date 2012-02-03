@@ -41,6 +41,9 @@
 	$('#fadeover_1').fadeover({width: 500, height: 100});
 </script>
 <br style="clear: both;" />&nbsp;<br style="clear: both;" />
-<a href="#" onclick="$('#fadeover_1').fadeover('disable'); return false;">Disable Control</a> - <a href="#" onclick="$('#fadeover_1').fadeover('enable'); return false;">Enable Control</a>
+<a href="#" id="disable" onclick="$('#fadeover_1').fadeover('disable'); return false;">Disable Control</a> - <a href="#" onclick="$('#fadeover_1').fadeover('enable'); return false;" id="enable">Enable Control</a>
+<script>
+	$('#disable').fadeover({ui_button: {enabled: true, icons: { primary: 'ui-icon-gear', secondary: null}}});
+</script>
 </body>
 </html>
