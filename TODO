@@ -4,3 +4,4 @@
  * Support no animations during autosizing
  * Autosizing doesn't always get the correct size
  * Using an anchor tag as a fadeover results in yucky dotted borders
+ * Support "selected" state, with behaviour identical to the "disabled" state, to allow people to do menus properly
