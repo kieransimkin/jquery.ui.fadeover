@@ -362,7 +362,7 @@ $.widget( "slinq.fadeover", {
 			return;
 		}
 		if (parseInt(this.options.width) != this.options.width || parseInt(this.options.height) != this.options.height) { 
-			alert('FadeOver: width and height must be numeric');
+			throw new Error('FadeOver: width and height must be numeric');
 			return;
 		}
 		this.options.width=parseInt(this.options.width);
