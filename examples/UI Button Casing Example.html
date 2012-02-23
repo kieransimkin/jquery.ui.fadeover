@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UI Button Casing Example</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+<script src="../jquery.ui.fadeover.js"></script>
+<script src="../jquery.ui.fadeover.button.casing.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-darkness/jquery.ui.theme.css" type="text/css" media="all" />
+</head>
+<body>
+<!--<div id="switcher"></div>
+<br style="clear: both;" />-->
+<style type="text/css">
+	.button { 
+		float: left;
+	}
+</style>
+<div id="button_1" class="button">UI Button</div><!-- This is the actual container of the widget -->
+<script>
+	$('#button_1').button({
+		icons: {
+			primary: 'ui-icon-gear'
+		}
+	});
+</script>
+<div id="button_2" class="button">UI Button</div><!-- This is the actual container of the widget -->
+<script>
+	$('#button_2').button();
+</script>
+<div id="button_3" class="button">UI Button</div><!-- This is the actual container of the widget -->
+<script>
+	$('#button_3').button({
+		icons: {
+			primary: 'ui-icon-gear',
+			secondary: 'ui-icon-pencil' 
+		}
+	});
+</script>
+<div id="button_4" class="button"></div><!-- This is the actual container of the widget -->
+<script>
+	$('#button_4').button({
+		icons: {
+			primary: 'ui-icon-lock'
+		},
+		text: false
+	});
+</script>
+<small><div id="button_5" class="button">UI Button</div></small><!-- This is the actual container of the widget -->
+<script>
+	$('#button_5').button({
+		icons: {
+			primary: 'ui-icon-lock'
+		}
+	});
+</script>
+<small><div id="button_6" class="button">UI Button</div></small><!-- This is the actual container of the widget -->
+<script>
+	$('#button_6').button({
+		icons: {
+			primary: 'ui-icon-lock'
+		},
+		text: false
+	});
+</script>
+<small><div id="button_7" class="button">UI Button</div></small><!-- This is the actual container of the widget -->
+<script>
+	$('#button_7').button({
+		icons: {
+			primary: 'ui-icon-gear',
+			secondary: 'ui-icon-triangle-1-s'
+		},
+		text: false
+	});
+</script>
+<br style="clear: both;" />
+&nbsp;
+<br style="clear: both;" />
+<small><a id="disablebutton" href="#" onclick="$('.fadeover').fadeover('disable'); return false;">Disable Controls</a> - <a href="#" onclick="$('.fadeover').fadeover('enable'); return false;" id="enablebutton">Enable Controls</a></small>
+<br style="clear: both;" />
+&nbsp;
+<br style="clear: both;" />
+<script type="text/javascript">
+$('#disablebutton').button({icons: {primary: 'ui-icon-gear'}});
+$('#enablebutton').button({icons: {primary: 'ui-icon-gear'}});
+</script>
+<!--<script type="text/javascript"
+  src="http://jqueryui.com/themeroller/themeswitchertool/">
+</script>
+<script>
+  $(document).ready(function(){
+    $('#switcher').themeswitcher({loadTheme: 'ui-darkness', onSelect: function() { 
+	$('.fadeover').fadeover('refresh');
+	return false;
+}});
+  });
+</script>-->
+
+<br style="clear: both;" />
+<a href="http://slinq.com/software/fadeover">FadeOver by Kieran Simkin</a><br />
+<a href=".">Return to examples list</a>
+</body>
+</html>

@@ -9,7 +9,7 @@
  * This program is a wrapper, to allow you to use FadeOver in place of 
  * standard jQuery UI buttons without having to rewrite all your code. 
  * With this script loaded, you can call .button(), and you'll get a 
- * FadeOver button instead of the standard jQuery UI one.
+ * FadeOver button instead of the standard jQuery UI one. 
  *
  */
 (function( $ ) {
