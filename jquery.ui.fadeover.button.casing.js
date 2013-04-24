@@ -1,5 +1,5 @@
 /* jQuery.ui.fadeover.button.casing.js
- * Ver: 1.1.1
+ * Ver: 1.1.2
  * by Kieran Simkin - http://SlinQ.com/
  *
  * Copyright (c) 2011-2013, Kieran Simkin

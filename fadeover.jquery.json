@@ -1,7 +1,7 @@
 {
 
         "name": "fadeover",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"author": {
 
 		"name": "Kieran Simkin",
@@ -17,6 +17,7 @@
 			"type": "BSD-JavaScript-1-Clause",
 			"url": "http://slinq.com/blog/2011/12/31/the-1-clause-bsd-license-javascript-license/"
 		},
+		{
 			"type": "BSD-2-Clause",
 			"url": "http://www.opensource.org/licenses/bsd-license.php"
 		}
