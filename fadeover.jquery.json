@@ -1,10 +1,16 @@
 {
 
         "name": "fadeover",
-	"version": "1.1",
-	"author": "Kieran Simkin",
+	"version": "1.1.0",
+	"author": {
+
+		"name": "Kieran Simkin",
+		"email": "kieran@slinq.com",
+		"url": "http://slinq.com/"
+	},
 	"description": "Mouseover effect that fades in and out",
 	"homepage": "http://slinq.com/software/fadeover",
+	"demo": "http://slinq.com/software/fadeover/jquery.ui.fadeover/examples/",
 	"title": "jQuery.ui.FadeOver",
 	"licenses": [
 		{
@@ -14,6 +20,14 @@
 			"type": "BSD-2-Clause",
 			"url": "http://www.opensource.org/licenses/bsd-license.php"
 		}
+	],
+	"keywords": [
+		"rollover",
+		"animation",
+		"effect",
+		"ui",
+		"fade",
+		"mouseover"
 	],
 	"dependencies": {
 		"jquery": "1"

@@ -1,8 +1,8 @@
 /*  jQuery.ui.fadeover.js
- *  Ver: 1.1
+ *  Ver: 1.1.0
  *  by Kieran Simkin - http://SlinQ.com/
  *
- *  Copyright (c) 2011-2012, Kieran Simkin
+ *  Copyright (c) 2011-2013, Kieran Simkin
  *  All rights reserved.
  *
  *  Redistribution and use, with or without modification, are permitted provided that the following condition is met:
